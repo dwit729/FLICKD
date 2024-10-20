@@ -33,7 +33,7 @@ const getAllMovies = async (req, res) => {
 //GET MOVIE BY ID
 const getMovieById = async (req, res) => {
     try {
-      const movie = await Movie.findById(req.params.movieId).populate('reviews');
+      const movie = await Movie.findById(req.params.id)
       if (!movie) {
         return res.status(404).json({ message: 'Movie not found' });
       }
@@ -54,8 +54,33 @@ const createMovie = async (req, res) => {
   }
 };
 
+// Add a review to a movie
+const addReviewToMovie = async (req, res) => {
+  const { userId, rating, content } = req.body;
 
+  try {
+    const movie = await Movie.findById(req.params.movieId);
+    if (!movie) return res.status(404).json({ message: 'Movie not found' });
+
+    // Create a new review
+    const review = new Review({
+      movie: req.params.movieId,
+      user: userId,
+      rating,
+      content
+    });
+
+    // Save the review and add it to the movie's reviews array
+    await review.save();
+    movie.reviews.push(review._id);
+    await movie.save();
+
+    res.status(201).json({ message: 'Review added successfully', review });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+};
 
 module.exports = {
-    createMovie, getAllMovies, getMovieById
+    createMovie, getAllMovies, getMovieById, addReviewToMovie
 }

@@ -1,6 +1,6 @@
 const express = require('express')
 const {
-    createMovie, getAllMovies, getMovieById
+    createMovie, getAllMovies, getMovieById, addReviewToMovie
 } = require('../controllers/MovieController')
 
 const router = express.Router()
@@ -14,5 +14,7 @@ router.get('/:id', getMovieById)
 //POST A NEW MOVIE
 router.post('/', createMovie)
 
+// ADD REVIEW TO MOVIE
+router.post('/:movieId/reviews', addReviewToMovie);
 
 module.exports = router
