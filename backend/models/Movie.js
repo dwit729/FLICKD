@@ -6,6 +6,7 @@ const movieSchema = new Schema({
     title: { type: String, required: true },
     genre: [{ type: String, required: true }],  // Array of genres
     director: { type: String, required: true },
+    year: { type: Number, required: true },
     cast: [{ type: String }],  // Array of cast members
     rating: { type: Number, default: 0 },  // Average rating from reviews
     reviewCount: { type: Number, default: 0 },  // Number of reviews
