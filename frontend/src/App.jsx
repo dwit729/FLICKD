@@ -3,6 +3,7 @@ import { Button, ConfigProvider, Space } from 'antd';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import './App.css'
 import HomePage from './pages/HomePage';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
 
@@ -11,7 +12,7 @@ function App() {
       
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<HomePage/>}></Route>
+          <Route path='/' element={<ProfilePage/>}></Route>
         </Routes>
       </BrowserRouter>
     </>

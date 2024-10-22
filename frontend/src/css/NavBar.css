@@ -1,0 +1,44 @@
+.navbar {
+    background-color: #111; 
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar-container {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.menu-icon {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.auth-buttons {
+    margin-right: auto;
+}
+
+.auth-buttons a {
+    color: white;
+    text-decoration: none;
+    margin: 0 5px;
+}
+ 
+/* di ko na maurong sa pinakagilid yung logo,mb hahah kaya ginitna ko na lang*/
+
+.logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-left: auto;
+    
+}
