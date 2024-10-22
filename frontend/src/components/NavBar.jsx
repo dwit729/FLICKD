@@ -1,18 +1,39 @@
-import React from 'react'
-import '../css/NavBar.css'
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import '../css/NavBar.css';
 
-const NavBar = () => {
-  return (
-       <nav className="navbar">
-            <div className="navbar-container">
-                <button className="menu-icon">☰</button>
-                <div className="auth-buttons">
-                    <a href="#" className="login">Log in</a> | <a href="#" className="signup">Sign up</a>
+const Navbar = () => {
+    const [isSideNavOpen, setIsSideNavOpen] = useState(false);
+
+    const toggleSideNav = () => {
+        setIsSideNavOpen(!isSideNavOpen);
+    };
+
+    return (
+        <>
+            <nav className="navbar">
+                <div className="navbar-container">
+                <button className="menu-icon" onClick={toggleSideNav}>☰</button>
+                    <div className="auth-buttons">
+                    <NavLink to="/login" className={({ isActive }) => isActive ? "active-link" : ""}>
+                        Log in
+                    </NavLink> | 
+                    <a href="#" className="signup">Sign up</a>
+                    </div>
+                    <div className="brand">FLiCKD</div>
                 </div>
-                <div className="logo">FLiCKD</div>
-            </div>
-        </nav>
-  )
-}
+            </nav>
 
-export default NavBar
+            <div className={`side-nav ${isSideNavOpen ? 'open' : ''}`}>
+                <button className="close-btn" onClick={toggleSideNav}>x</button>
+                <a href="#" className="side-nav-link">About Us</a>
+                <a href="#" className="side-nav-link">Services</a>
+                <a href="#" className="side-nav-link">Contact</a>
+            </div>
+
+            {isSideNavOpen && <div className="overlay" onClick={toggleSideNav}></div>}
+        </>
+    );
+};
+
+export default Navbar;

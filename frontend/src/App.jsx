@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { Button, ConfigProvider, Space } from 'antd';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import './App.css'
-import HomePage from './pages/HomePage';
-import ProfilePage from './pages/ProfilePage';
+import LogInPage from './pages/LogInPage';
+import Navbar from './components/NavBar';
 
 function App() {
 
@@ -11,8 +11,9 @@ function App() {
     <>
       
       <BrowserRouter>
+      <Navbar/>
         <Routes>
-          <Route path='/' element={<ProfilePage/>}></Route>
+          <Route path='/Login' element={<LogInPage/>}></Route>
         </Routes>
       </BrowserRouter>
     </>
