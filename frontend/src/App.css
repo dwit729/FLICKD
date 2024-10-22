@@ -15,4 +15,33 @@ body {
     --secondary_accent: #9f87af;
     --tertiary_accent: #d36135;
     --contrast: #ffffff;
+    --compliment: #445566;
+}
+
+.title-heading {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.content-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 30px 0 30px;
+}
+
+.carousel-container {
+    width: 720px;
+}
+
+.info-container {
+    text-align: center;
+    color: white;
+}
+
+.content-segment {
+    padding: 10px;
+    background: var(--compliment);
+    border-radius: 10px;
+    margin-bottom: 20px;
 }

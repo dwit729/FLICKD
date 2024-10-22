@@ -1,0 +1,10 @@
+.carousel-style {
+    margin: 0;
+    height: 400px;
+    color: #fff;
+    background: var(--compliment);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
