@@ -1,12 +1,19 @@
 import { useState } from 'react'
+import { Button, ConfigProvider, Space } from 'antd';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import './App.css'
+import HomePage from './pages/HomePage';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-     
+      
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<HomePage/>}></Route>
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
