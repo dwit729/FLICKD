@@ -31,7 +31,7 @@ body {
 }
 
 .carousel-container {
-    width: 720px;
+    width: 900px;
 }
 
 .info-container {
@@ -41,7 +41,17 @@ body {
 
 .content-segment {
     padding: 10px;
+    width: 400px;
     background: var(--compliment);
     border-radius: 10px;
     margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
+
+.text-segment {
+    text-align: start;
+    width: 70%;
 }
