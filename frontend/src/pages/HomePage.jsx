@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faHeart, faStar } from '@fortawesome/free-regular-svg-icons'
 
 import "../css/Carousel.css";
+import "../css/Button.css";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -28,9 +29,10 @@ const HomePage = () => {
           </Carousel>
         </div>
         <div className="info-container">
-          <h1 className="title-heading">
-            Watch, Feel, Review, and Share! Experience FLiCKD!
-          </h1>
+          <h1 className="title-heading"> Watch, Feel, Review, and Share! Experience FLiCKD! </h1>
+
+          <button className="button-default">Get Started - It's free!</button>
+
           <div className="content-segment">
             <FontAwesomeIcon size="3x" icon={faEye} />
             <p className="text-segment">
