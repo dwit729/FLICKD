@@ -34,6 +34,7 @@ body {
 
 .carousel-container {
     width: 900px;
+    position: relative;
 }
 
 .info-container {
@@ -61,4 +62,23 @@ body {
     margin-left: 10px;
     text-align: start;
     width: 70%;
+}
+
+.cover-section {
+    position: absolute;
+    top: 360px;
+    left: 50px;
+    z-index: 10;
+}
+
+.cover-template {
+    background: var(--compliment);
+    height: 100px;
+    width: 200px;
+    border-radius: 10px;
+    border: 1px solid var(--contrast);
+}
+
+.cover-img {
+    border-radius: 10px;
 }
