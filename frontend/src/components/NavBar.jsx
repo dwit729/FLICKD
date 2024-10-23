@@ -15,10 +15,13 @@ const Navbar = () => {
                 <div className="navbar-container">
                 <button className="menu-icon" onClick={toggleSideNav}>☰</button>
                     <div className="auth-buttons">
-                    <NavLink to="/login" className={({ isActive }) => isActive ? "active-link" : ""}>
-                        Log in
-                    </NavLink> | 
-                    <a href="#" className="signup">Sign up</a>
+                    <NavLink to="/login" className={({ isActive }) => (isActive ? 'active-link' : '')}>
+                    Log in
+                    </NavLink>
+                    |
+                    <NavLink to="/signup" className={({ isActive }) => (isActive ? 'active-link' : '')}>
+                    Sign up
+                    </NavLink>
                     </div>
                     <div className="brand">FLiCKD</div>
                 </div>

@@ -5,6 +5,7 @@ import './App.css'
 import LogInPage from './pages/LogInPage';
 import Navbar from './components/NavBar';
 import HomePage from './pages/HomePage';
+import SignUpPage from './pages/SignUpPage';
 
 function App() {
 
@@ -16,6 +17,8 @@ function App() {
         <Routes>
           <Route path='/Home' element={<HomePage/>}></Route>
           <Route path='/Login' element={<LogInPage/>}></Route>
+          <Route path='/SignUp' element={<SignUpPage/>}></Route>
+
         </Routes>
       </BrowserRouter>
     </>
