@@ -19,6 +19,8 @@ body {
 }
 
 .title-heading {
+    width: 80%;
+    text-align: start;
     font-size: 24px;
     font-weight: 600;
     margin-bottom: 20px;
@@ -31,17 +33,52 @@ body {
 }
 
 .carousel-container {
-    width: 720px;
+    width: 900px;
+    position: relative;
 }
 
 .info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
     text-align: center;
     color: white;
 }
 
 .content-segment {
-    padding: 10px;
+    padding: 20px;
+    width: 500px;
     background: var(--compliment);
     border-radius: 10px;
     margin-bottom: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    align-items: center;
+}
+
+.text-segment {
+    font-size: 18px;
+    margin-left: 10px;
+    text-align: start;
+    width: 70%;
+}
+
+.cover-section {
+    position: absolute;
+    top: 360px;
+    left: 50px;
+    z-index: 10;
+}
+
+.cover-template {
+    background: var(--compliment);
+    height: 100px;
+    width: 200px;
+    border-radius: 10px;
+    border: 1px solid var(--contrast);
+}
+
+.cover-img {
+    border-radius: 10px;
 }
