@@ -159,6 +159,8 @@ body {
     font-weight: 600;
 }
 
+
+/* Account Settings */
 .content-section {
     display: flex;
     justify-content: center;
@@ -173,6 +175,33 @@ body {
 
 .details-container {
     width: 500px;
+}
+
+/* Profile */
+.banner {
+    background-color: var(--compliment);
+    height: 400px;
+    width: 100%;
+}
+
+.profile-section {
+    position: absolute;
+    top: 360px;
+    left: 50px;
+    display: flex;
+    flex-direction: row;
+}
+
+.img-template {
+    background: var(--contrast);
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+}
+
+.profile-info {
+    margin-top: 110px;
+    margin-left: 20px;
 }
 
 @media only screen and (max-width: 1300px) {
