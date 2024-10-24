@@ -10,47 +10,41 @@ import { width } from "@fortawesome/free-brands-svg-icons/fa42Group";
 
 const { Header, Footer, Sider, Content } = Layout;
 
-const movieList = [
-  {
-    title: "Spider Man: No Way Home",
-    year: "2022",
-    banner: "https://static1.srcdn.com/wordpress/wp-content/uploads/2022/01/Spider-Man-No-Way-Home-All-Three-Spider-Men-Together.jpg",
-    cover: "https://images.moviesanywhere.com/5a7e82e7749d6dd8e447fcfeec50c064/55462afc-41ad-4322-ad46-1caca29fcc36.jpg",
-    favoriteCount: "11.1K"
-  },
-  {
-    title: "Sherlock",
-    year: "2010",
-    banner: "https://player.bbc.com/static/posters/1810556/original/1585653092-069c50d32152399ae9f0d81ca5df32e35a7695c9.jpg",
-    cover: "https://m.media-amazon.com/images/M/MV5BNTQzNGZjNDEtOTMwYi00MzFjLWE2ZTYtYzYxYzMwMjZkZDc5XkEyXkFqcGc@._V1_.jpg",
-    favoriteCount: "11.1K"
-  },
-  {
-    title: "Dead Sea",
-    year: "2024",
-    banner: "https://www.highonfilms.com/wp-content/uploads/2024/08/Dead-Sea2.jpg",
-    cover: "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p26900448_p_v13_ab.jpg",
-    favoriteCount: "11.1K"
-  },
-  {
-    title: "Bad Boys: Ride or Die",
-    year: "2024",
-    banner: "https://images.bauerhosting.com/empire/2024/06/bad-boys-2.png?ar=16%3A9&fit=crop&crop=top&auto=format&w=1440&q=80",
-    cover: "https://upload.wikimedia.org/wikipedia/en/8/8b/Bad_Boys_Ride_or_Die_%282024%29_poster.jpg",
-    favoriteCount: "11.1K"
-  }
-];
 
 const HomePage = () => {
+  const movieList = [
+    {
+      title: "Spider Man: No Way Home",
+      year: "2022",
+      banner: "https://static1.srcdn.com/wordpress/wp-content/uploads/2022/01/Spider-Man-No-Way-Home-All-Three-Spider-Men-Together.jpg",
+      cover: "https://images.moviesanywhere.com/5a7e82e7749d6dd8e447fcfeec50c064/55462afc-41ad-4322-ad46-1caca29fcc36.jpg",
+      favoriteCount: "11.1K"
+    },
+    {
+      title: "Sherlock",
+      year: "2010",
+      banner: "https://player.bbc.com/static/posters/1810556/original/1585653092-069c50d32152399ae9f0d81ca5df32e35a7695c9.jpg",
+      cover: "https://m.media-amazon.com/images/M/MV5BNTQzNGZjNDEtOTMwYi00MzFjLWE2ZTYtYzYxYzMwMjZkZDc5XkEyXkFqcGc@._V1_.jpg",
+      favoriteCount: "11.1K"
+    },
+    {
+      title: "Dead Sea",
+      year: "2024",
+      banner: "https://www.highonfilms.com/wp-content/uploads/2024/08/Dead-Sea2.jpg",
+      cover: "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p26900448_p_v13_ab.jpg",
+      favoriteCount: "11.1K"
+    },
+    {
+      title: "Bad Boys: Ride or Die",
+      year: "2024",
+      banner: "https://images.bauerhosting.com/empire/2024/06/bad-boys-2.png?ar=16%3A9&fit=crop&crop=top&auto=format&w=1440&q=80",
+      cover: "https://upload.wikimedia.org/wikipedia/en/8/8b/Bad_Boys_Ride_or_Die_%282024%29_poster.jpg",
+      favoriteCount: "11.1K"
+    }
+  ];
 
-  const [sliderCount, setSliderCount] = useState(0);
-  const [currentMovie, setcurrentMovie] = useState(movieList[0]);
-
-  
 
   function determineArrow(type) {
-    setSliderCount(type === "right" ? sliderCount + 1 : sliderCount  - 1);
-    setcurrentMovie(movieList[sliderCount])
     
 
     return (
@@ -63,10 +57,11 @@ const HomePage = () => {
   return (
     <>
       <div className="content-container">
-        <div className="carousel-container">
+        <div className="hero-container">
+          <div className="carousel-container">
           <Carousel
             arrows
-            autoplay={false}
+            autoplay={true}
             autoplaySpeed={2000}
             infinite={true}
             nextArrow={determineArrow("right")}
@@ -83,28 +78,6 @@ const HomePage = () => {
 
           </Carousel>
 
-          <div className="cover-section">
-            <div className="cover-template">
-              <img
-                src={
-                  currentMovie.cover
-                }
-                className="cover-img"
-                alt="img-cover"
-              />
-            </div>
-
-            <div className="cover-info">
-              <h1 className="cover-text">{currentMovie.title}</h1>
-              <div className="cover-year">
-                <h1 className="cover-text">{currentMovie.year}</h1>
-              </div>
-              <div className="cover-hearts">
-                <FontAwesomeIcon icon={faHeart} size="2x"/>
-                <h1 className="cover-hearts-txt">{currentMovie.favoriteCount}</h1>
-              </div>
-            </div>
-          </div>
         </div>
         <div className="info-container">
           <h1 className="title-heading">
@@ -114,26 +87,32 @@ const HomePage = () => {
           <button className="button-default">Get Started - It's free!</button>
 
           <div className="content-segment">
-            <FontAwesomeIcon size="3x" icon={faEye} />
+            <FontAwesomeIcon size="2x" icon={faEye} />
             <p className="text-segment">
               Keep track of every film you’ve ever watched (or just start from
               the day you join)
             </p>
           </div>
           <div className="content-segment">
-            <FontAwesomeIcon size="3x" icon={faHeart} />
+            <FontAwesomeIcon size="2x" icon={faHeart} />
             <p className="text-segment">
               Show some love for your favorite films, lists and reviews with a
               “like”
             </p>
           </div>
           <div className="content-segment">
-            <FontAwesomeIcon size="3x" icon={faStar} />
+            <FontAwesomeIcon size="2x" icon={faStar} />
             <p className="text-segment">
               Rate each film on a five-star scale (with halves) to record and
               share your reaction
             </p>
           </div>
+        </div>
+        </div>
+        <br/>
+        <hr/>
+        <div className="gallery-container">
+
         </div>
       </div>
     </>

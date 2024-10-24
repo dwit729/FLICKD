@@ -3,11 +3,11 @@
     background: var(--primary_accent);
     border: solid #66a182 1px;
     border-radius: 10px;
-    width: 300px;
+    width: clamp(200px, 90%, 300px);
     font-weight: 600;
-    font-size: 26px;
+    font-size: clamp(1.4rem, 3vw, 1.5rem);
     padding: 10px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     text-align: start;
     display: flex;
     justify-content: center;    

@@ -23,7 +23,7 @@ const Navbar = () => {
                     Sign up
                     </NavLink>
                     </div>
-                    <div className="brand">FLiCKD</div>
+                    <div className="logo">FLiCKD</div>
                 </div>
             </nav>
 
