@@ -214,4 +214,19 @@ body {
     .content-segment{
         display: none;
     }
+
+    .profile-section {
+        position: absolute;
+        top: 380px;
+    }
+
+    .img-template {
+        height: 150px;
+        width: 150px;
+    }
+
+    .profile-info {
+        margin-top: 80px;
+    }
+    
 }
