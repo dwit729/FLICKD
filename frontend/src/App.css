@@ -20,6 +20,7 @@ body {
 
 .title-heading {
     width: 80%;
+    color: var(--contrast);
     text-align: start;
     font-size: 24px;
     font-weight: 600;
@@ -69,11 +70,12 @@ body {
     top: 360px;
     left: 50px;
     z-index: 10;
+    width: 80%;
 }
 
 .cover-template {
     background: var(--compliment);
-    height: 100px;
+    height: 300px;
     width: 200px;
     border-radius: 10px;
     border: 1px solid var(--contrast);
@@ -81,4 +83,42 @@ body {
 
 .cover-img {
     border-radius: 10px;
+}
+
+.cover-info {
+    position: absolute;
+    top: 50%;
+    left: 30%;
+}
+
+.cover-text {
+    width: 100%;
+    color: var(--contrast);
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.cover-year {
+    position: absolute ;
+    left: 110%;
+    top: 9%;
+    background: var(--secondary_accent);
+    border-radius: 5px;
+    text-align: center;
+    width: 80px;
+}
+
+.cover-hearts {
+    margin-top: 10px;
+    color: var(--primary_accent);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.cover-hearts-txt {
+    margin-left: 10px;
+    color: var(--primary_accent);
+    font-size: 30px;
+    font-weight: 600;
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { React, useState } from "react";
 import { Carousel, Flex, Layout } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faHeart, faStar } from "@fortawesome/free-regular-svg-icons";
@@ -6,17 +6,19 @@ import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 import "../css/Carousel.css";
 import "../css/Button.css";
+import { width } from "@fortawesome/free-brands-svg-icons/fa42Group";
 
 const { Header, Footer, Sider, Content } = Layout;
 
-const [cover, setCover] = useState("");
-
 const HomePage = () => {
-  
   function determineArrow(type) {
-    return <FontAwesomeIcon size="3x" icon={type === "right" ? faArrowRight : faArrowLeft } />;
+    return (
+      <FontAwesomeIcon
+        size="3x"
+        icon={type === "right" ? faArrowRight : faArrowLeft}
+      />
+    );
   }
-
   return (
     <>
       <div className="content-container">
@@ -28,16 +30,12 @@ const HomePage = () => {
             infinite={true}
             nextArrow={determineArrow("right")}
             prevArrow={determineArrow("left")}
-            
           >
             <div className="carousel-style">
               <img
                 src="https://static1.srcdn.com/wordpress/wp-content/uploads/2022/01/Spider-Man-No-Way-Home-All-Three-Spider-Men-Together.jpg"
                 alt="item1"
               />
-
-              
-
             </div>
             <div className="carousel-style">
               <img
@@ -60,9 +58,26 @@ const HomePage = () => {
           </Carousel>
 
           <div className="cover-section">
-          <div className="cover-template">
-                  <img src={"https://images.moviesanywhere.com/5a7e82e7749d6dd8e447fcfeec50c064/55462afc-41ad-4322-ad46-1caca29fcc36.jpg"} className="cover-img" alt="img-cover" />
+            <div className="cover-template">
+              <img
+                src={
+                  "https://images.moviesanywhere.com/5a7e82e7749d6dd8e447fcfeec50c064/55462afc-41ad-4322-ad46-1caca29fcc36.jpg"
+                }
+                className="cover-img"
+                alt="img-cover"
+              />
+            </div>
+
+            <div className="cover-info">
+              <h1 className="cover-text">Spider-Man: No Way Home</h1>
+              <div className="cover-year">
+                <h1 className="cover-text">2024</h1>
               </div>
+              <div className="cover-hearts">
+                <FontAwesomeIcon icon={faHeart} size="2x"/>
+                <h1 className="cover-hearts-txt">11.1k</h1>
+              </div>
+            </div>
           </div>
         </div>
         <div className="info-container">
