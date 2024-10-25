@@ -58,8 +58,17 @@
     z-index: 1000;
 }
 
+.side-nav > a {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    width: 100%;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+}
+
 .side-nav.open {
-    width: 250px; /* Set the width when open */
+    width: 30%; /* Set the width when open */
 }
 
 .side-nav .close-btn {

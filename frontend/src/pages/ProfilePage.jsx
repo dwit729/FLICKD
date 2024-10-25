@@ -15,6 +15,23 @@ const ProfilePage = () => {
           <h1 className="title">Username</h1>
         </div>
       </div>
+      <div className="movie-info">
+        <h1 className="title">Recently Viewed:</h1>
+        <div className="movie-container">
+          <div className="movie-section">
+            <div className="movie-template"></div>
+            <h1 className="title">Movie Name</h1>
+          </div>
+          <div className="movie-section">
+            <div className="movie-template"></div>
+            <h1 className="title">Movie Name</h1>
+          </div>
+          <div className="movie-section">
+            <div className="movie-template"></div>
+            <h1 className="title">Movie Name</h1>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
