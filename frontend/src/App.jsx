@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage';
 import SignUpPage from './pages/SignUpPage';
 import AccountSettings from './pages/AccountSettings';
 import ProfilePage from './pages/ProfilePage';
+import AboutUs from './pages/AboutUsPage';
 
 function App() {
 
@@ -17,11 +18,13 @@ function App() {
       <BrowserRouter>
       <Navbar/>
         <Routes>
-          <Route path='/Home' element={<HomePage/>}></Route>
+          <Route path='/' element={<HomePage/>}></Route>
           <Route path='/Login' element={<LogInPage/>}></Route>
           <Route path='/SignUp' element={<SignUpPage/>}></Route>
           <Route path='/Profile' element={<ProfilePage/>}></Route>
           <Route path='/Account_Settings' element={<AccountSettings/>}></Route>
+          <Route path='/AboutUs' element={<AboutUs/>}/>
+
         </Routes>
       </BrowserRouter>
     </>

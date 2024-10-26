@@ -1,0 +1,82 @@
+*{
+    align-content: center;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+  }
+  
+  
+  .banner {
+    background-color: #4a4a4a;
+    height: 200px;
+  }
+  
+  .about-section {
+    color: white;
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .about-section h2 {
+    margin: 20px;
+    font-size: 1.5rem;
+  }
+  
+  .about-section p {
+    margin-top: 1rem;
+    font-size: 1rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+  }
+  
+  .button-default {
+    transition: ease-out 0.3s;
+    background: var(--primary_accent);
+    border: solid #66a182 1px;
+    border-radius: 10px;
+    width: clamp(200px, 90%, 300px);
+    font-weight: 600;
+    font-size: clamp(1.4rem, 3vw, 1.5rem);
+    padding: 10px;
+    margin: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;    
+}
+
+.button-default:hover {
+    transition: ease-in 0.3s;
+    border: solid 1px;
+    background: var(--background);
+    border-color: var(--primary_accent);
+    color: var(--primary_accent);
+}
+
+.button-compliment {
+    transition: ease-out 0.3s;
+    background: #9f87af;
+    border: solid #9f87af 1px;
+    color: #ffff;
+    border-radius: 10px;
+    width: 100%;
+    font-weight: 600;
+    font-size: clamp(1.4rem, 3vw, 1.5rem);
+    padding: 10px;
+    margin: 20px;
+    text-align: start;
+    display: flex;
+    justify-content: center;    
+}
+
+.button-compliment:hover {
+    transition: ease-in 0.3s;
+    border: solid 1px;
+    background: var(--background);
+    border-color: #9f87af;
+    color: #9f87af;   
+}
