@@ -3,11 +3,11 @@
     background: var(--primary_accent);
     border: solid #66a182 1px;
     border-radius: 10px;
-    width: 300px;
+    width: clamp(200px, 90%, 300px);
     font-weight: 600;
-    font-size: 26px;
+    font-size: clamp(1.4rem, 3vw, 1.5rem);
     padding: 10px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     text-align: start;
     display: flex;
     justify-content: center;    
@@ -19,4 +19,28 @@
     background: var(--background);
     border-color: var(--primary_accent);
     color: var(--primary_accent);
+}
+
+.button-compliment {
+    transition: ease-out 0.3s;
+    background: #9f87af;
+    border: solid #9f87af 1px;
+    color: #ffff;
+    border-radius: 10px;
+    width: 100%;
+    font-weight: 600;
+    font-size: clamp(1.4rem, 3vw, 1.5rem);
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: start;
+    display: flex;
+    justify-content: center;    
+}
+
+.button-compliment:hover {
+    transition: ease-in 0.3s;
+    border: solid 1px;
+    background: var(--background);
+    border-color: #9f87af;
+    color: #9f87af;   
 }

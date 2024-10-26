@@ -4,14 +4,15 @@
     padding: 10px;
     display: flex;
     justify-content: space-between;
+
 }
 
 .navbar-container {
     width: 100%;
-    max-width: 1200px;
     margin-left: 10px;
     display: flex;
     align-items: center;
+    
 }
 
 .menu-icon {
@@ -35,11 +36,12 @@
 }
  
 /* di ko na maurong sa pinakagilid yung logo,mb hahah kaya ginitna ko na lang*/
+/* kasi brand yung nasa jsx na class name tapos dito logo also bat may maxwidth yung navbar container */
 
 .logo {
     font-weight: bold;
     font-size: 1.2rem;
-    margin-left: auto;
+    margin-right: 10px;
     
 }
 
@@ -48,7 +50,7 @@
     width: 0;
     position: fixed;
     top: 0;
-    right: 0;
+    left: 0;
     background-color: #111;
     overflow-x: hidden;
     transition: 0.3s;
@@ -56,8 +58,17 @@
     z-index: 1000;
 }
 
+.side-nav > a {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    width: 100%;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+}
+
 .side-nav.open {
-    width: 250px; /* Set the width when open */
+    width: 30%; /* Set the width when open */
 }
 
 .side-nav .close-btn {

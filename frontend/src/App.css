@@ -4,10 +4,16 @@
     box-sizing: border-box;
 }
 
+html, body {
+    overflow-x: hidden;
+
+}
+
 body {
     height: 100vh;
     width: 100svw;
     background: var(--background);
+    width: 100dvw;
 
     /* color palette */
     --background: #14181c;
@@ -18,8 +24,25 @@ body {
     --compliment: #445566;
 }
 
+.title {
+    color: var(--contrast);
+    text-align: start;
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.subtitle {
+    color: var(--contrast);
+    text-align: start;
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
 .title-heading {
     width: 80%;
+    color: var(--contrast);
     text-align: start;
     font-size: 24px;
     font-weight: 600;
@@ -28,29 +51,43 @@ body {
 
 .content-container {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     margin: 30px 30px 0 30px;
 }
 
+.hero-container{
+    width: 100%;
+    padding: 10px;
+    max-width: 100dvw;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
 .carousel-container {
-    width: 900px;
+    width: clamp(200px, 100%, 900px);
+    height: 500px;
     position: relative;
 }
 
 .info-container {
+    height: 500px;
+    overflow-x: hidden;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: space-around;
     text-align: center;
     color: white;
 }
 
 .content-segment {
-    padding: 20px;
-    width: 500px;
+    padding: 10px;
+    width: 95%;
     background: var(--compliment);
     border-radius: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: space-evenly;
     flex-direction: row;
@@ -58,7 +95,7 @@ body {
 }
 
 .text-segment {
-    font-size: 18px;
+    font-size: clamp(0.8rem, 2vw, 1rem);
     margin-left: 10px;
     text-align: start;
     width: 70%;
@@ -69,11 +106,12 @@ body {
     top: 360px;
     left: 50px;
     z-index: 10;
+    width: 80%;
 }
 
 .cover-template {
     background: var(--compliment);
-    height: 100px;
+    height: 300px;
     width: 200px;
     border-radius: 10px;
     border: 1px solid var(--contrast);
@@ -81,4 +119,140 @@ body {
 
 .cover-img {
     border-radius: 10px;
+}
+
+.cover-info {
+    position: absolute;
+    top: 50%;
+    left: 30%;
+}
+
+.cover-text {
+    width: 100%;
+    color: var(--contrast);
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.cover-year {
+    position: absolute ;
+    left: 110%;
+    top: 9%;
+    background: var(--secondary_accent);
+    border-radius: 5px;
+    text-align: center;
+    width: 80px;
+}
+
+.cover-hearts {
+    margin-top: 10px;
+    color: var(--primary_accent);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.cover-hearts-txt {
+    margin-left: 10px;
+    color: var(--primary_accent);
+    font-size: 30px;
+    font-weight: 600;
+}
+
+
+/* Account Settings */
+.content-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 80vh;
+}
+
+.text-field {
+    margin-bottom: 30px;
+}
+
+.details-container {
+    width: 500px;
+}
+
+/* Profile */
+.banner {
+    background-color: var(--compliment);
+    height: 400px;
+    width: 100%;
+}
+
+.profile-section {
+    position: absolute;
+    top: 360px;
+    left: 50px;
+    display: flex;
+    flex-direction: row;
+}
+
+.img-template {
+    background: var(--contrast);
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+}
+
+.profile-info {
+    margin-top: 110px;
+    margin-left: 20px;
+}
+
+.movie-info {
+    position: absolute;
+    top: 650px;
+    left: 150px;
+}
+
+.movie-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.movie-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.movie-template {
+    background-color: var(--compliment);
+    border-radius: 8px;
+    border: 1px solid var(--contrast);
+    width: 230px;
+    height: 300px;
+    margin: 0 20px 20px 0;
+}
+
+@media only screen and (max-width: 1300px) {
+    .hero-container{
+        flex-direction: column;
+    }
+    .info-container{
+        height: auto;
+    }
+    .content-segment{
+        display: none;
+    }
+
+    .profile-section {
+        position: absolute;
+        top: 380px;
+    }
+
+    .img-template {
+        height: 150px;
+        width: 150px;
+    }
+
+    .profile-info {
+        margin-top: 80px;
+    }
+    
 }
