@@ -1,0 +1,43 @@
+.gallery-box{
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    padding: 20px;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.gallery-movie{
+    aspect-ratio: 2/3;
+    width: 20svw;
+    max-width: 200px;
+    border: 1px solid white;
+    border-radius: 10px;
+    background-color: grey;
+}
+
+.gallery-box p {
+    color: white;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
+
+
+.gallery-movie img{
+    height: 100%;
+    object-fit: cover;
+}
+
+@media only screen and (max-aspect-ratio: 2/3){
+
+    .gallery-box p {
+
+        display: none;
+    }
+}
+
+
+
+
+

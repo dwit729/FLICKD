@@ -1,16 +1,16 @@
 .button-default {
     transition: ease-out 0.3s;
     background: var(--primary_accent);
-    border: solid #66a182 1px;
     border-radius: 10px;
     width: clamp(200px, 90%, 300px);
     font-weight: 600;
     font-size: clamp(1.4rem, 3vw, 1.5rem);
     padding: 10px;
     margin-bottom: 20px;
-    text-align: start;
-    display: flex;
-    justify-content: center;    
+    text-align: center;
+    height: auto;
+    justify-content: center;
+            
 }
 
 .button-default:hover {
@@ -24,7 +24,7 @@
 .button-compliment {
     transition: ease-out 0.3s;
     background: #9f87af;
-    border: solid #9f87af 1px;
+    border: solid #2e2534 1px;
     color: #ffff;
     border-radius: 10px;
     width: 100%;

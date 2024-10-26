@@ -47,6 +47,7 @@ body {
     font-size: 24px;
     font-weight: 600;
     margin-bottom: 20px;
+    overflow: hidden;
 }
 
 .content-container {
@@ -54,6 +55,8 @@ body {
     flex-direction: column;
     justify-content: space-between;
     margin: 30px 30px 0 30px;
+    
+
 }
 
 .hero-container{
@@ -92,6 +95,7 @@ body {
     justify-content: space-evenly;
     flex-direction: row;
     align-items: center;
+    overflow: hidden;
 }
 
 .text-segment {
@@ -230,16 +234,31 @@ body {
     margin: 0 20px 20px 0;
 }
 
-@media only screen and (max-width: 1300px) {
+.gallery-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 900px) {
     .hero-container{
         flex-direction: column;
     }
     .info-container{
         height: auto;
+        width: 100%;
+        align-items: center;
+        
+    }
+    .title-heading{
+        text-align: center;
     }
     .content-segment{
         display: none;
     }
+
+
 
     .profile-section {
         position: absolute;

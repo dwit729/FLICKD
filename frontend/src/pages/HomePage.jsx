@@ -5,7 +5,7 @@ import { faEye, faHeart, faStar } from "@fortawesome/free-regular-svg-icons";
 import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 import "../css/Carousel.css";
-import "../css/Button.css";
+
 import { width } from "@fortawesome/free-brands-svg-icons/fa42Group";
 import MovieGallery from "../components/MovieGallery";
 
@@ -85,7 +85,7 @@ const HomePage = () => {
             Watch, Feel, Review, and Share! Experience FLiCKD!
           </h1>
 
-          <a href="/login" type="button" className="button-default">Get Started - It's free!</a>
+          <a href="/login" type="button" className="button-default m-0">Get Started - It's free!</a>
 
           <div className="content-segment">
             <FontAwesomeIcon size="2x" icon={faEye} />
