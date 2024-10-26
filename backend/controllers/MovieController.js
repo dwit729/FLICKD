@@ -47,7 +47,7 @@ const getMovieById = async (req, res) => {
 const createMovie = async (req, res) => {
   try {
     const newMovie = new Movie(req.body);
-    await newMovie.save();
+    await newMovie.create();
     res.status(201).json(newMovie);
   } catch (error) {
     res.status(500).json({ message: 'Server error' });

@@ -49,26 +49,21 @@
     height: 100%;
     width: 0;
     position: fixed;
+    padding-top: 60px;
+    display: flex;
+    flex-direction: column;
     top: 0;
     left: 0;
     background-color: #111;
     overflow-x: hidden;
     transition: 0.3s;
-    padding-top: 60px;
     z-index: 1000;
+    text-wrap: nowrap;
 }
 
-.side-nav > a {
-    margin-top: 40px;
-    margin-bottom: 40px;
-    width: 100%;
-    text-align: center;
-    font-size: 28px;
-    font-weight: 600;
-}
 
 .side-nav.open {
-    width: 30%; /* Set the width when open */
+    width: clamp(250px, 30%, 500px); /* Set the width when open */
 }
 
 .side-nav .close-btn {
@@ -84,10 +79,16 @@
 
 .side-nav .side-nav-link {
     padding: 10px 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     text-decoration: none;
     color: white;
     display: block;
     transition: 0.2s;
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
 }
 
 .side-nav .side-nav-link:hover {

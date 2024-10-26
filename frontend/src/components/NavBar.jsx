@@ -25,7 +25,7 @@ const Navbar = () => {
                     Sign up
                     </NavLink>
                     </div>
-                    <div className="logo">FLiCKD</div>
+                    <NavLink to="/" className="logo">FLiCKD</NavLink>
                 </div>
             </nav>
 

@@ -7,6 +7,7 @@ import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import "../css/Carousel.css";
 import "../css/Button.css";
 import { width } from "@fortawesome/free-brands-svg-icons/fa42Group";
+import MovieGallery from "../components/MovieGallery";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -112,7 +113,7 @@ const HomePage = () => {
         <br/>
         <hr/>
         <div className="gallery-container">
-
+                <MovieGallery/>
         </div>
       </div>
     </>

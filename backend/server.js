@@ -1,4 +1,5 @@
 require('dotenv').config()
+const cors = require('cors');
 
 const express = require("express");
 const mongoose = require('mongoose')
@@ -14,6 +15,12 @@ const app = express();
 
 //middleware---------------------------
 app.use(express.json())
+app.use(cors({
+    origin: 'http://localhost:5173', // Adjust this to match your React app's origin
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], // Allow specific methods as needed
+    allowedHeaders: ['Content-Type', 'Authorization'] // Specify allowed headers
+  }));
+  
 app.use((req, res, next) => {
     console.log(req.path, req.method)
     next()
