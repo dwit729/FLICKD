@@ -33,7 +33,7 @@ const Navbar = () => {
                 <button className="close-btn" onClick={toggleSideNav}>x</button>
                 <a href="aboutus" className="side-nav-link">About Us</a>
                 <a href="#" className="side-nav-link">Services</a>
-                <a href="#" className="side-nav-link">Contact</a>
+                <a href="contact" className="side-nav-link">Contact</a>
             </div>
 
             {isSideNavOpen && <div className="overlay" onClick={toggleSideNav}></div>}
