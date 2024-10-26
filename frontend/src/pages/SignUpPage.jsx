@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../css/SignUp.css';
 
 const SignUpPage = () => {
+  const [Status, setStatus] = useState();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -23,7 +24,9 @@ const SignUpPage = () => {
   
   const handleSignUp = async () => {
       try {
-        
+        const response = await axios.post("https://flickd-api.vercel.app/api/users/register")
+        setStatus(response.data)
+        console.log(Status)
       } catch (error) {
         console.log
       }
