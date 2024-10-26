@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import {useNavigate} from 'react-router-dom'
 import axios from 'axios';
 import '../css/SignUp.css';
 
 const SignUpPage = () => {
+  const navigate = useNavigate();
   const [Status, setStatus] = useState();
   const [formData, setFormData] = useState({
     firstName: '',
@@ -24,9 +26,13 @@ const SignUpPage = () => {
   
   const handleSignUp = async () => {
       try {
-        const response = await axios.post("https://flickd-api.vercel.app/api/users/register")
-        setStatus(response.data)
-        console.log(Status)
+        const response = await axios.post("https://flickd-api.vercel.app/api/users/register", formData)
+
+            setStatus(response)
+            console.log(Status)
+            navigate("/login")
+       
+       
       } catch (error) {
         console.log
       }
