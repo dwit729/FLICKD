@@ -4,13 +4,13 @@ const bcrypt = require('bcryptjs');  // For password hashing
 
 // Register a new user
 const registerUser = async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, firstName, lastName, password } = req.body;
 
   try {
-    // Check if email already exists
-    let user = await User.findOne({ email });
+    // Check if username already exists
+    let user = await User.findOne({ username });
     if (user) {
-      return res.status(400).json({ message: 'Email already in use' });
+      return res.status(400).json({ message: 'Username already in use' });
     }
 
     // Hash the password
@@ -20,14 +20,15 @@ const registerUser = async (req, res) => {
     // Create the new user
     user = new User({
       username,
-      email,
-      passwordHash: hashedPassword
+      firstName,
+      lastName,
+      password: hashedPassword
     });
 
     await user.save();
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({message: error});
   }
 };
 

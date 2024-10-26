@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import '../css/SignUp.css';
 
 const SignUpPage = () => {
@@ -19,6 +20,14 @@ const SignUpPage = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+  
+  const handleSignUp = async () => {
+      try {
+        
+      } catch (error) {
+        console.log
+      }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,6 +41,7 @@ const SignUpPage = () => {
     } else {
       setErrors({ passwordMismatch: false, passwordTooShort: false });
         //dito sa backend
+        handleSignUp()
       console.log('Signed up:', formData);
     }
   };
@@ -46,6 +56,9 @@ const SignUpPage = () => {
     });
     setErrors({ passwordMismatch: false, passwordTooShort: false });
   };
+
+ 
+ 
 
 
   return (
@@ -122,7 +135,6 @@ const SignUpPage = () => {
             </label>
           </div>
           <p style={{textAlign:"center", color:"white"}}type="button" onClick={clearForm}>Clear Fields</p>
-
          
           <div className="form-actions">
             <button type="submit">Register</button>
