@@ -29,6 +29,7 @@ const Navbar = () => {
 
             <div className={`side-nav ${isSideNavOpen ? 'open' : ''}`}>
                 <button className="close-btn" onClick={toggleSideNav}>x</button>
+                <a href="/home" className="side-nav-link">Home</a>
                 <a href="#" className="side-nav-link">About Us</a>
                 <a href="#" className="side-nav-link">Services</a>
                 <a href="#" className="side-nav-link">Contact</a>

@@ -65,12 +65,12 @@ const HomePage = () => {
             Watch, Feel, Review, and Share! Experience FLiCKD!
           </h1>
 
-          <button className="button-default">Get Started - It's free!</button>
+          <a href="/login" type="button" className="button-default">Get Started - It's free!</a>
 
           <div className="content-segment">
             <FontAwesomeIcon size="3x" icon={faEye} />
             <p className="text-segment">
-              Keep track of every film you’ve ever watched (or just start from
+              Keep track of every film you've ever watched (or just start from
               the day you join)
             </p>
           </div>
