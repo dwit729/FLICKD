@@ -31,9 +31,9 @@ const Navbar = () => {
 
             <div className={`side-nav ${isSideNavOpen ? 'open' : ''}`}>
                 <button className="close-btn" onClick={toggleSideNav}>x</button>
-                <a href="aboutus" className="side-nav-link">About Us</a>
-                <a href="#" className="side-nav-link">Services</a>
-                <a href="contact" className="side-nav-link">Contact</a>
+                <NavLink to="/" className="side-nav-link">About Us</NavLink>
+                <NavLink to="/" className="side-nav-link">Services</NavLink>
+                <NavLink to="/contact" className="side-nav-link">Contact</NavLink>
             </div>
 
             {isSideNavOpen && <div className="overlay" onClick={toggleSideNav}></div>}
