@@ -1,9 +1,18 @@
-import React from "react";
-import { HeartFilled } from "@ant-design/icons";
+import React, { useState } from "react";
+import { HeartFilled, StarOutlined } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowUpFromBracket,
+  faShareNodes,
+} from "@fortawesome/free-solid-svg-icons";
+import { faBookmark } from "@fortawesome/free-regular-svg-icons";
+import { Input } from "antd";
+
+const { TextArea } = Input;
 
 const MoviePage = () => {
+  const [value, setValue] = useState("");
+
   return (
     <div>
       <div className="banner-template"></div>
@@ -63,12 +72,70 @@ const MoviePage = () => {
               fringilla nulla sit amet, imperdiet erat.
             </p>
           </div>
+
+          <hr className="separator"/>
+
+          <h1 className="title">Cast:</h1>
+          <div className="cast-section">  
+            <div className="cast-tag">
+                <h1 className="tag-name">Name</h1>
+                <p className="tag-role">Role</p>
+            </div>
+            <div className="cast-tag">
+                <h1 className="tag-name">Name</h1>
+                <p className="tag-role">Role</p>
+            </div>
+            <div className="cast-tag">
+                <h1 className="tag-name">Name</h1>
+                <p className="tag-role">Role</p>
+            </div>
+            <div className="cast-tag">
+                <h1 className="tag-name">Name</h1>
+                <p className="tag-role">Role</p>
+            </div>
+            
+          </div>
         </div>
 
         <div className="info-content-controls">
-            <div className="icon-controls">
-                
+          <div className="icon-controls">
+            <span className="icon-set">
+              <FontAwesomeIcon icon={faBookmark} />
+              Save
+            </span>
+            <span className="icon-set active">
+              <HeartFilled />
+              Liked
+            </span>
+          </div>
+
+          <div className="rating-section">
+            <div className="rating">
+              <StarOutlined />
+              <StarOutlined />
+              <StarOutlined />
+              <StarOutlined />
+              <StarOutlined />
             </div>
+            <h1>Rate</h1>
+          </div>
+
+          <div className="comment-section">
+            <TextArea
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              placeholder="Write a Review"
+              autoSize={{
+                minRows: 3,
+                maxRows: 5,
+              }}
+            />
+          </div>
+
+          <div className="share-section">
+            <FontAwesomeIcon icon={faShareNodes} />
+            <h1>Share</h1>
+          </div>
         </div>
       </div>
     </div>
