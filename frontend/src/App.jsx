@@ -10,6 +10,7 @@ import AccountSettings from './pages/AccountSettings';
 import ProfilePage from './pages/ProfilePage';
 import AboutUs from './pages/AboutUsPage';
 import Contact from './pages/Contact';
+import MoviePage from './pages/MoviePage';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
           <Route path='/Account_Settings' element={<AccountSettings/>}></Route>
           <Route path='/AboutUs' element={<AboutUs/>}/>
           <Route path='/Contact' element={<Contact/>}/>
+          <Route path='/Movie' element={<MoviePage/>}/>
         </Routes>
       </BrowserRouter>
     </>

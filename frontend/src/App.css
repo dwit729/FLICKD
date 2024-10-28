@@ -182,7 +182,7 @@ body {
 }
 
 /* Profile */
-.banner {
+.banner-template {
     background-color: var(--compliment);
     height: 400px;
     width: 100%;
@@ -241,6 +241,118 @@ body {
     justify-content: center;
 }
 
+/* Movie Page */
+.cover-display {
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-cover-template {
+    background: var(--secondary_accent);
+    border: 1px solid var(--contrast);
+    border-radius: 8px;
+    height: 350px;
+    width: 230px;
+    margin-bottom: 15px;
+}
+
+.movie-cover {
+    border-radius: 8px;
+    height: 100%;
+}
+
+.movie-controls {
+    width: 230px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icon-style {
+    width: clamp(80px, 140px, 160px);
+    font-size: clamp(24px, 40px, 44px);
+    color: var(--primary_accent);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cover-info-title {
+    font-size: 40px;
+    font-weight: 600;
+    color: var(--contrast);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.year-tag {
+    background: var(--secondary_accent);
+    border-radius: 10px;
+    font-size: 28px;
+    width: 100px;
+    text-align: center;
+}
+
+.icon {
+    font-size: 40px;
+    color: var(--compliment);
+}
+
+.body-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+}
+
+.body-content-controls {
+    font-size: 28px;
+    color: var(--contrast);
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid var(--contrast);
+}
+
+.content-header {
+    display: flex;
+    flex-direction: column;
+}
+
+.control-tab {
+    margin-left: 20px;
+    padding-right: 20px;
+    border-right: 1px solid var(--contrast);
+    border-right: 1px solid var(--contrast);
+}
+
+.body-content-info {
+    color: var(--contrast);
+    width: 95%;
+    font-size: 18px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.info-content-controls {
+    background: var(--compliment);
+    border-radius: 10px;
+    width: 300px;
+    height: 400px;
+}
+
+.primary-content {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
 @media only screen and (max-width: 900px) {
     .hero-container{
         flex-direction: column;
@@ -257,8 +369,6 @@ body {
     .content-segment{
         display: none;
     }
-
-
 
     .profile-section {
         position: absolute;

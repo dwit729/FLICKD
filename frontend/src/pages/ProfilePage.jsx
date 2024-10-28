@@ -3,7 +3,7 @@ import React from "react";
 const ProfilePage = () => {
   return (
     <div>
-      <div className="banner"></div>
+      <div className="banner-template"></div>
       <div className="profile-section">
         <div className="img-template">
           <img
