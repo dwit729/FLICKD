@@ -11,6 +11,7 @@ import ProfilePage from './pages/ProfilePage';
 import AboutUs from './pages/AboutUsPage';
 import Contact from './pages/Contact';
 import MoviePage from './pages/MoviePage';
+import SearchPage from './pages/SearchPage';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
           <Route path='/AboutUs' element={<AboutUs/>}/>
           <Route path='/Contact' element={<Contact/>}/>
           <Route path='/Movie' element={<MoviePage/>}/>
+          <Route path='/Search' element={<SearchPage/>}/>
         </Routes>
       </BrowserRouter>
     </>
