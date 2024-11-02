@@ -3,6 +3,7 @@ import React from "react";
 const SearchPage = () => {
   return (
     <div className="center-container">
+
       <h1 className="title">Find anything you want!</h1>
       <form>
         <label
