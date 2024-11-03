@@ -17,7 +17,7 @@ const getAllMovies = async (req, res) => {
     if (query) {
       pipeline.push({
         $search: {
-          index: 'movieTitleIndex',  // The name of your Atlas Search index
+          index: 'search',  // The name of your Atlas Search index
           compound: {
             should: [
               {
