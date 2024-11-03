@@ -150,11 +150,52 @@ const removeFromFavorites = async (req, res) => {
   }
 };
 
+const getUserFavorites = async (req, res) => {
+  const userId = req.params.userId;
+
+  try {
+    // Fetch user to get their favorite movie IDs
+    const user = await User.findById(userId).lean();
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Retrieve favorite movies by IDs
+    const favoriteMovies = await Movie.find({ _id: { $in: user.favoriteMovies } }).lean();
+    return res.status(200).json(favoriteMovies);
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Error retrieving favorite movies' });
+  }
+};
+
+
+// Get all reviews made by the user
+const getUserReviews = async (req, res) => {
+  const userId = req.params.userId;
+
+  try {
+    // Fetch all reviews by the user and populate the associated movie details
+    const userReviews = await Review.find({ userId: userId })
+      .populate('movieId', 'title year') // Populate with relevant fields, like title
+      .lean();
+
+    return res.status(200).json(userReviews);
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Error retrieving user reviews' });
+  }
+};
+
 module.exports = { 
   registerUser, 
   loginUser, 
   getUserProfile, 
   updateUserProfile, 
   addToFavorites, 
-  removeFromFavorites 
+  removeFromFavorites,
+  getUserFavorites,
+  getUserReviews
 };

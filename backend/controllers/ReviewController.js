@@ -13,7 +13,7 @@ const getAllReviewsForMovie = async (req, res) => {
     }
 
     // Find all reviews related to the movie
-    const reviews = await Review.find({ movie: movieId }).populate('user', 'username');
+    const reviews = await Review.find({ movieId: movieId }).populate('userId', 'username');
     res.json(reviews);
   } catch (error) {
     res.status(500).json({ message: 'Server error' });

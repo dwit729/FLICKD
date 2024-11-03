@@ -143,12 +143,12 @@ const SignUpPage = () => {
               />
             </label>
           </div>
-          <p style={{textAlign:"center", color:"white"}}type="button" onClick={clearForm}>Clear Fields</p>
          
           <div className="form-actions">
             <button type="submit">Register</button>
-            <a href="/login">Log in</a>
+            <a className='bg-blue-900' href="/login">Go to login</a>
           </div>
+          <p className="text-red-500 text-center mt-5 hover:cursor-pointer" type="button" onClick={clearForm}>Clear Fields</p>
         </form>
       </div>
     </div>

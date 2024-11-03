@@ -6,7 +6,9 @@ const {
   getUserProfile, 
   updateUserProfile, 
   addToFavorites, 
-  removeFromFavorites 
+  removeFromFavorites,
+  getUserFavorites,
+  getUserReviews
 } = require('../controllers/UserController');
 
 // Register a new user
@@ -26,5 +28,11 @@ router.post('/:userId/favorites', addToFavorites);
 
 // Remove a movie from favorites
 router.delete('/:userId/favorites/:movieId', removeFromFavorites);
+
+// Get user favorites by id
+router.get('/:userId/favorites', getUserFavorites);
+
+// Get user reviews by id
+router.get('/:userId/reviews', getUserReviews);
 
 module.exports = router;

@@ -3,6 +3,7 @@ import { Carousel, Flex, Layout } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faHeart, faStar } from "@fortawesome/free-regular-svg-icons";
 import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 import "../css/Carousel.css";
 
@@ -10,6 +11,7 @@ import { width } from "@fortawesome/free-brands-svg-icons/fa42Group";
 import MovieGallery from "../components/MovieGallery";
 
 const { Header, Footer, Sider, Content } = Layout;
+
 
 
 const HomePage = () => {
@@ -44,7 +46,7 @@ const HomePage = () => {
     }
   ];
 
-
+  const navigate = useNavigate();
   function determineArrow(type) {
     
 

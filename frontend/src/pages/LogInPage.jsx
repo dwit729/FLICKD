@@ -13,8 +13,7 @@ const Login = () => {
       <div className="login-box">
         <button className="close-btn">x</button>
         <div className="login-header">
-          <img src="logo.jpg" alt="Logo" className="login-logo" />
-          <h1>FLiCKD</h1>
+          <h1 className="text-3xl font-bold">FLiCKD</h1>
         </div>
         <form>
           <div className="input-group">
@@ -31,8 +30,7 @@ const Login = () => {
           </button>
         </form>
         <div className="login-footer">
-          <a href="#">Forgot Password?</a>
-          <a href="/signup">Create an Account</a>
+          <a href="/signup" className="underline">Create an Account</a>
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 const Movie = require('../models/Movie')
+const Review = require('../models/Review')
 
 
 
@@ -113,8 +114,8 @@ const addReviewToMovie = async (req, res) => {
 
     // Create a new review
     const review = new Review({
-      movie: req.params.movieId,
-      user: userId,
+      movieId: req.params.movieId,
+      userId: userId,
       rating,
       content
     });
@@ -126,7 +127,7 @@ const addReviewToMovie = async (req, res) => {
 
     res.status(201).json({ message: 'Review added successfully', review });
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json(error);
   }
 };
 
