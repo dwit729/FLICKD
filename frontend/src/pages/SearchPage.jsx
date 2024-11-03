@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import {Input} from 'antd';
+import axios from 'axios'
+import '../css/Gallery.css';
 const {Search} = Input
 
 const SearchPage = () => {
@@ -13,9 +15,9 @@ const SearchPage = () => {
   const handleSearch = async () => {
     try {
       setisLoading(true)
-      const response = await axios.get(`https://flickd-api.vercel.app/api/movies?title=${encodeURIComponent(query)}`);
-      const data = await response.json();
-      setMovies(data);
+      console.log(`${encodeURIComponent(query)}`)
+      const response = await axios.get(`https://flickd-api.vercel.app/api/movies?query=${encodeURIComponent(query)}`);
+      setMovies(response.data);
       setisLoading(false)
     } catch (error) {
       console.error('Error fetching movies:', error);
@@ -26,7 +28,7 @@ const SearchPage = () => {
     <div className=" flex flex-col items-center pt-10">
 
       <h1 className="title text-xl sm:text-3xl">Find anything you want!</h1>
-      <Search className="w-11/12" placeholder="input search text" type="text" onChange={(e) => setQuery(e.target.value)} required onSearch={handleSearch} enterButton="Search" size="large" loading={isLoading} />
+      <Search className="w-11/12" placeholder="Search movies by title, director, year, rating..." type="text" onChange={(e) => setQuery(e.target.value)} required onSearch={handleSearch} enterButton="Search" size="large" loading={isLoading} />
 
       <hr/><br/><br/>
 

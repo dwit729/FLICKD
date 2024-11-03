@@ -2,51 +2,74 @@ const Movie = require('../models/Movie')
 
 
 
-
 const getAllMovies = async (req, res) => {
   try {
-    const { genre, year, director, title, sortBy, limit } = req.query;
+    const { query, genre, sortBy, limit } = req.query;
 
-
+    // Base filter for genre
     const matchStage = {};
     if (genre) matchStage.genre = { $in: genre.split(',') };
-    if (year) matchStage.year = Number(year);
-    if (director) matchStage.director = { $regex: director, $options: 'i' };
 
-
+    // Construct the aggregation pipeline
     const pipeline = [];
 
-
-    if (title) {
+    // Add Atlas Search stage for fuzzy multi-field search
+    if (query) {
       pipeline.push({
         $search: {
-          index: 'title_text', 
-          text: {
-            query: title,
-            path: 'title',
-            fuzzy: {
-              maxEdits: 4  
-            }
+          index: 'movieTitleIndex',  // The name of your Atlas Search index
+          compound: {
+            should: [
+              {
+                text: {
+                  query: query,
+                  path: 'title',
+                  fuzzy: { maxEdits: 2 }
+                }
+              },
+              {
+                text: {
+                  query: query,
+                  path: 'director',
+                  fuzzy: { maxEdits: 2 }
+                }
+              },
+              {
+                text: {
+                  query: query,
+                  path: 'year'
+                }
+              },
+              {
+                text: {
+                  query: query,
+                  path: 'rating'
+                }
+              }
+            ],
+            minimumShouldMatch: 1
           }
         }
       });
     }
 
-
+    // Apply additional filters if needed
     if (Object.keys(matchStage).length > 0) {
       pipeline.push({ $match: matchStage });
     }
 
-
+    // Add sorting stage based on the sortBy parameter
     if (sortBy === 'year') {
       pipeline.push({ $sort: { year: -1 } });
     } else if (sortBy === 'rating') {
       pipeline.push({ $sort: { rating: -1 } });
     }
 
+    // Add limit stage for pagination or result limit
     const resultsLimit = limit ? parseInt(limit) : 10;
     pipeline.push({ $limit: resultsLimit });
 
+    // Execute the aggregation pipeline
     const movies = await Movie.aggregate(pipeline);
 
     res.json(movies);
@@ -54,6 +77,7 @@ const getAllMovies = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
 
 
 //GET MOVIE BY ID
