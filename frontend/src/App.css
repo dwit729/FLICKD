@@ -195,6 +195,12 @@ body {
     width: 500px;
 }
 
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 /* Profile */
 .banner-template {
     background-color: var(--compliment);

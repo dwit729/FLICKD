@@ -1,8 +1,8 @@
-.button-default {
+.button-primary {
     transition: ease-out 0.3s;
-    background: var(--primary_accent);
+    background: var(--secondary_accent);
     border-radius: 10px;
-    width: clamp(200px, 90%, 300px);
+    width: clamp(200px, 100px, 300px);
     font-weight: 600;
     font-size: clamp(1.4rem, 3vw, 1.5rem);
     padding: 10px;
@@ -10,24 +10,23 @@
     text-align: center;
     height: auto;
     justify-content: center;
-            
 }
 
-.button-default:hover {
+.button-primary:hover {
     transition: ease-in 0.3s;
     border: solid 1px;
     background: var(--background);
-    border-color: var(--primary_accent);
-    color: var(--primary_accent);
+    border-color: var(--secondary_accent);
+    color: var(--secondary_accent);
 }
 
-.button-compliment {
+.button-complimentary {
     transition: ease-out 0.3s;
-    background: #9f87af;
-    border: solid #2e2534 1px;
+    border:  solid #9f87af 1px;
+    background: #2e2534;
     color: #ffff;
     border-radius: 10px;
-    width: 100%;
+    width: clamp(200px, 100px, 300px);
     font-weight: 600;
     font-size: clamp(1.4rem, 3vw, 1.5rem);
     padding: 10px;
@@ -35,12 +34,13 @@
     text-align: start;
     display: flex;
     justify-content: center;    
+    align-items: center;
 }
 
-.button-compliment:hover {
+.button-complimentary:hover {
     transition: ease-in 0.3s;
     border: solid 1px;
     background: var(--background);
-    border-color: #9f87af;
-    color: #9f87af;   
+    border-color: var(--contrast);
+    color: var(--contrast);
 }
