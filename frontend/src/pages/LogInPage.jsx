@@ -2,9 +2,24 @@ import React, {useState} from "react";
 import "../css/LogIn.css";
 import "../images/logo.jpg";
 import PopUp from "../components/PopUp";
+import axios from "axios";
 
 const Login = () => {
   const [triggerPopup, setTriggerPopUp] = useState(false);
+  const [formData, setFormData] = useState();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = () =>{
+      try {
+        
+      } catch (error) {
+        
+      }
+  }
 
   return (
     <div className="login-container">
@@ -15,17 +30,17 @@ const Login = () => {
         <div className="login-header">
           <h1 className="text-3xl font-bold">FLiCKD</h1>
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label htmlFor="username">Username:</label>
-            <input type="text" id="username" placeholder="Enter Username" />
+            <input type="text" id="username" name="username" required onChange={handleChange} placeholder="Enter Username" />
           </div>
           <div className="input-group">
             <label htmlFor="password">Password:</label>
-            <input type="password" id="password" placeholder="Enter Password" />
+            <input type="password" id="password" name="password" required onChange={handleChange} placeholder="Enter Password" />
           </div>
           
-          <button onClick={() => setTriggerPopUp(true)} type="submit" className="login-btn">
+          <button type="submit" className="login-btn">
             Log In
           </button>
         </form>
