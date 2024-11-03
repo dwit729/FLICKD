@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useState, useEffect } from 'react';
 
 import "../css/Gallery.css";
+import "../App.css"
 
 const MovieGallery = () => {
     const [Loading, setLoading] = useState(true);

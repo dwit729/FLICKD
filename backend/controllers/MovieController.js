@@ -4,11 +4,7 @@ const Movie = require('../models/Movie')
 
 const getAllMovies = async (req, res) => {
   try {
-    const { query, genre, sortBy, limit } = req.query;
-
-    // Base filter for genre
-    const matchStage = {};
-    if (genre) matchStage.genre = { $in: genre.split(',') };
+    const { query, sortBy, limit } = req.query;
 
     // Construct the aggregation pipeline
     const pipeline = [];
@@ -37,6 +33,13 @@ const getAllMovies = async (req, res) => {
               {
                 text: {
                   query: query,
+                  path: 'genre',
+                  fuzzy: { maxEdits: 2 }
+                }
+              },
+              {
+                text: {
+                  query: query,
                   path: 'year'
                 }
               },
@@ -51,11 +54,6 @@ const getAllMovies = async (req, res) => {
           }
         }
       });
-    }
-
-    // Apply additional filters if needed
-    if (Object.keys(matchStage).length > 0) {
-      pipeline.push({ $match: matchStage });
     }
 
     // Add sorting stage based on the sortBy parameter
@@ -77,6 +75,7 @@ const getAllMovies = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
 
 
 
