@@ -30,13 +30,13 @@
     object-fit: cover;
 }
 
-@media only screen and (max-aspect-ratio: 5/6){
+@media only screen and (max-aspect-ratio: 5/6) or (max-width: 900px){
 
     .gallery-box p {
-
         display: none;
     }
 }
+
 
 
 
