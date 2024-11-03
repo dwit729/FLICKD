@@ -52,7 +52,7 @@ const loginUser = async (req, res) => {
     // Return user info if login is successful
     res.json({ message: 'Login successful', userId: user._id });
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ error});
   }
 };
 

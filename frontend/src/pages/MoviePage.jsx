@@ -9,9 +9,10 @@ import "../css/Movie.css"
 const MoviePage = () => {
   const [value, setValue] = useState("");
   const [Loaded, setLoaded] = useState(false);
-  const [LoggedIn, setLoggedIn] = useState(false);
+  const [LoggedIn, setLoggedIn] = useState(true);
   const { id } = useParams();
   const [Movie, setMovie] = useState();
+  const [ReviewList, setReviewList] = useState([]);
 
 
   const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
@@ -34,8 +35,20 @@ const MoviePage = () => {
       }
   }
 
+  const fetchReview = async () => {
+      setLoaded(false)
+    try {
+      const response = await axios.get(`https://flickd-api.vercel.app/api/reviews/movie/${id}`)
+      setReviewList(response.data);
+      console.log(ReviewList)
+      setLoaded(true)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   useEffect(() =>{
       fetchData();
+      fetchReview()
   }, []);
 
 
@@ -84,11 +97,19 @@ const MoviePage = () => {
                       {Rating ? <p className="text-center">{desc[Rating - 1]}</p> : ''}
                     </div>
                 }
-              
             </div>
+        <br/>    
+        <hr/>
+        <div className="reviews-container">
+              {ReviewList.map((review) => {
+                  return(
+                    <>
+                      <p>{review.content}</p>
+                    </>
+                  )
+              })}
+        </div>
       </div>
-
-      
     }
      
     </>

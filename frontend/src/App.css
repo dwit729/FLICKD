@@ -204,7 +204,7 @@ body {
 /* Profile */
 .banner-template {
     background-color: var(--compliment);
-    height: 400px;
+    height: 200px;
     width: 100%;
 }
 
