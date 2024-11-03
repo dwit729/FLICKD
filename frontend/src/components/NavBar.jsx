@@ -5,6 +5,8 @@ import { NavLink } from 'react-router-dom';
 import '../css/NavBar.css';
 
 const Navbar = () => {
+
+
     const [isSideNavOpen, setIsSideNavOpen] = useState(false);
 
     const toggleSideNav = () => {
@@ -31,8 +33,8 @@ const Navbar = () => {
 
             <div className={`side-nav ${isSideNavOpen ? 'open' : ''}`}>
                 <button className="close-btn" onClick={toggleSideNav}>x</button>
-                <NavLink to="/" className="side-nav-link">About Us</NavLink>
-                <NavLink to="/" className="side-nav-link">Services</NavLink>
+                <NavLink to="/" className="side-nav-link">Home</NavLink>
+                <NavLink to="/search" className="side-nav-link">Search</NavLink>
                 <NavLink to="/contact" className="side-nav-link">Contact</NavLink>
             </div>
 

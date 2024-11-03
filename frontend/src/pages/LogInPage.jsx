@@ -26,13 +26,10 @@ const Login = () => {
             <input type="password" id="password" placeholder="Enter Password" />
           </div>
           
-        {/* Inalis ko muna yung button sa form, di nag loload ng maayos pop-up */}
-
-        </form>
-
-        <button onClick={() => setTriggerPopUp(true)} type="submit" className="login-btn">
+          <button onClick={() => setTriggerPopUp(true)} type="submit" className="login-btn">
             Log In
           </button>
+        </form>
         <div className="login-footer">
           <a href="#">Forgot Password?</a>
           <a href="/signup">Create an Account</a>
