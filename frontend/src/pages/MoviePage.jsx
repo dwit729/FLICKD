@@ -7,21 +7,42 @@ import "../css/Movie.css"
 
 
 const MoviePage = () => {
-  const [value, setValue] = useState("");
   const [Loaded, setLoaded] = useState(false);
   const [LoggedIn, setLoggedIn] = useState(true);
+  const [User, setUser] = useState();
   const { id } = useParams();
   const [Movie, setMovie] = useState();
   const [ReviewList, setReviewList] = useState([]);
 
 
   const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
-  const [Rating, setRating] = useState(2);
+  const [Rating, setRating] = useState(0);
 
 
   const [Review, setReview] = useState();
 
 
+  
+  const fetchUser = async (userId) => {
+    try {
+        const response = await axios.get(`https://flickd-api.vercel.app/api/users/${userId}`);
+        setUser(response.data);
+    } catch (error) {
+        
+    }
+}
+
+const checkLoggedIn = () => {
+    try {
+        const userId = sessionStorage.getItem('userId');
+        if(userId){
+            setLoggedIn(true)
+            fetchUser(userId)
+        }
+    } catch (error) {
+        
+    }
+}
 
 
   const fetchData = async () => {
@@ -47,6 +68,7 @@ const MoviePage = () => {
     }
   }
   useEffect(() =>{
+      checkLoggedIn()
       fetchData();
       fetchReview()
   }, []);

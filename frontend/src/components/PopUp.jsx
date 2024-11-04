@@ -3,7 +3,7 @@ import '../css/PopUp.css'
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 
 function PopUp(props) {
-  return (props.trigger) && (props.type === "success") ? (
+  return (props.type === "success") ? (
     <div className='popup'>
         <div className="popup-inner">
             <CheckCircleOutlined className='text-green-600 text-6xl'/>
@@ -11,7 +11,7 @@ function PopUp(props) {
             <button className="okBtn" onClick={() => props.setTrigger(false)}>Okay</button>
         </div>
     </div>
-  ) : (props.trigger) && (props.type === "failed") ? (
+  ) : (
     <div className='popup'>
         <div className="popup-inner">
             <CloseCircleOutlined className='text-red-600 text-6xl'/>
@@ -19,7 +19,7 @@ function PopUp(props) {
             <button className="okBtn" onClick={() => props.setTrigger(false)}>Okay</button>
         </div>
     </div>
-  ) : "";
+  )
 }
 
 export default PopUp

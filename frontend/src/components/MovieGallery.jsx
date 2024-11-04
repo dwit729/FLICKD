@@ -38,8 +38,8 @@ const MovieGallery = () => {
                 return(
                     <>
                         <div className='flex-column justify-center hover:cursor-pointer'>
-                          <div className="gallery-movie" key={movie._id}>
-                              <img onClick={()=>{navigate(`/movie/${movie._id}`)}} onError={(e) => {e.target.style.display = 'none'}} src={movie.posterUrl} onLoad={()=>{setisLoading(false)}}/>
+                          <div className="gallery-movie" onClick={()=>{navigate(`/movie/${movie._id}`)}} key={movie._id}>
+                              <img onError={(e) => {e.target.style.display = 'none'}} src={movie.posterUrl} onLoad={()=>{setLoading(false)}}/>
                             </div>
                             <p>{movie.title}</p>
                         </div>          
