@@ -30,6 +30,7 @@ const SignUpPage = () => {
 
             setStatus(response)
             console.log(Status)
+            window.alert("User Signed Up Successfully!")
             navigate("/login")
        
        
