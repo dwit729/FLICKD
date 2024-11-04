@@ -16,6 +16,7 @@ const Navbar = () => {
     const handleLogOut = () => {
         sessionStorage.removeItem("userId")
         setLoggedIn(false);
+        navigate('/')
         window.location.reload();
         
     }

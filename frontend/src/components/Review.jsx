@@ -6,7 +6,7 @@ const Review = (props) => {
   return (
     <div className="review-container">
       <div className="review-header">
-        <h1 className="reviewer">{props.reviewer}</h1>
+        <h1 className="reviewer font-bold">{props.reviewer}</h1>
         <p> &nbsp; rated &nbsp; </p>
         <Rate value={props.rating} disabled/>
         <p className="post-date">  {props.posted.substring(0, props.posted.search('T'))}</p>

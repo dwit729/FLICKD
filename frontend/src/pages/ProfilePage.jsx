@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from 'axios'
+import { NavLink } from "react-router-dom";
 
 const ProfilePage = () => {
 
@@ -10,12 +11,13 @@ const ProfilePage = () => {
   const [Loaded, setLoaded] = useState(false);
 
   const id = sessionStorage.getItem("userId")
-  
+
   const fetchUser = async () => {
     setLoaded(false)
     try {
         const response = await axios.get(`https://flickd-api.vercel.app/api/users/${id}`);
         setUser(response.data);
+        setLoaded(true)
     } catch (error) {
           console.log(error)
     }  
@@ -25,9 +27,9 @@ const ProfilePage = () => {
   const fetchReviews = async (userId) => {
     setLoaded(false)
     try {
-        const response = await axios.get(`https://flickd-api.vercel.app/api/users/${userId}/reviews`);
+        const response = await axios.get(`https://flickd-api.vercel.app/api/users/${id}/reviews`);
         setReviewList(response.data);
-        checkIfFavorite()
+        setLoaded(true)
     } catch (error) {
       console.log(error)
     }
@@ -36,10 +38,9 @@ const ProfilePage = () => {
   const fetchFavorites = async (userId) => {
     setLoaded(false)
     try {
-        const response = await axios.get(`https://flickd-api.vercel.app/api/users/${userId}/favorites`);
+        const response = await axios.get(`https://flickd-api.vercel.app/api/users/${id}/favorites`);
         setFavorites(response.data);
         setLoaded(true)
-        checkIfFavorite()
     } catch (error) {
       console.log(error)
     }
@@ -56,7 +57,7 @@ const ProfilePage = () => {
 
   return (
     <>
-      {Loaded && 
+      {(Loaded && (User && ReviewList && Favorites)) && 
         <div className="container mx-auto px-4 py-8 max-w-screen-lg">
       <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
         <h2 className="text-3xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
@@ -67,10 +68,10 @@ const ProfilePage = () => {
         <div className="mb-8">
           <h3 className="text-xl font-medium text-gray-700 dark:text-gray-300 mb-3">Favorites</h3>
           <ul className="space-y-3">
-            {User.favorites.map((movie) => (
-              <li key={movie.id} className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
+            {Favorites.map((movie) => (
+              <li key={movie._id} className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
                 <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-                  {movie.title} ({movie.year})
+                  <NavLink className="underline" to={`/movie/${movie._id}`}>{movie.title}({movie.year})</NavLink> 
                 </p>
               </li>
             ))}
@@ -81,11 +82,11 @@ const ProfilePage = () => {
         <div>
           <h3 className="text-xl font-medium text-gray-700 dark:text-gray-300 mb-3">User Reviews</h3>
           <ul className="space-y-4">
-            {User.reviews.map((review) => (
-              <li key={review.id} className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
-                <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">{review.movie}</p>
+            {ReviewList.map((review) => (
+              <li key={review._id} className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
+                <NavLink to={`/movie/${review.movieId._id}`} className="text-lg font-semibold text-gray-800 dark:text-gray-200 underline">{review.movieId.title}</NavLink>
                 <p className="text-yellow-500 font-semibold dark:text-yellow-400">Rating: {review.rating} / 5</p>
-                <p className="text-gray-600 dark:text-gray-400">{review.comment}</p>
+                <p className="text-gray-600 dark:text-gray-400">{review.content}</p>
               </li>
             ))}
           </ul>

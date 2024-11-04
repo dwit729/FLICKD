@@ -117,21 +117,19 @@ const checkLoggedIn = () => {
           <div className="content-segment">
             <FontAwesomeIcon size="2x" icon={faEye} />
             <p className="text-segment">
-              Keep track of every film you've ever watched (or just start from
-              the day you join)
+              Search for Movies you love and get their details!
             </p>
           </div>
           <div className="content-segment">
             <FontAwesomeIcon size="2x" icon={faHeart} />
             <p className="text-segment">
-              Show some love for your favorite films, lists and reviews with a
-              “like”
+              Show some love for your favorite films and add them to you favorites list!
             </p>
           </div>
           <div className="content-segment">
             <FontAwesomeIcon size="2x" icon={faStar} />
             <p className="text-segment">
-              Rate each film on a five-star scale (with halves) to record and
+              Rate each film on a five-star scale to record and
               share your reaction
             </p>
           </div>

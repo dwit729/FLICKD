@@ -71,20 +71,37 @@ const getUserProfile = async (req, res) => {
 };
 
 // Update user profile by user ID
+
 const updateUserProfile = async (req, res) => {
-  const { username, email } = req.body;
+  const { username, firstName, lastName, oldPassword, newPassword } = req.body;
 
   try {
-    // Find the user and update their info
-    const updatedUser = await User.findByIdAndUpdate(
-      req.params.userId,
-      { username, email },
-      { new: true }
-    ).select('-passwordHash');
+    // Find the user by ID without updating
+    const user = await User.findById(req.params.userId);
 
-    if (!updatedUser) {
+    if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
+
+    // Check if the provided old password matches the stored password
+    const isMatch = await bcrypt.compare(oldPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Old password is incorrect' });
+    }
+
+    // Prepare updated fields
+    const updateData = { username, firstName, lastName };
+    if (newPassword) {
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+      updateData.password = hashedPassword;
+    }
+
+    // Update the user's profile with new data
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.userId,
+      updateData,
+      { new: true }
+    ).select('-password');
 
     res.json(updatedUser);
   } catch (error) {

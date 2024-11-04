@@ -87,7 +87,7 @@ const postReview = () => {
         setContent("")
         setTimeout(() => {
           window.location.reload();
-        }, 500);
+        }, 1000);
       }
     } catch (error) {
       console.log(error)
@@ -117,7 +117,7 @@ const handleDeleteReview = (id) => {
       });
       setTimeout(() => {
         window.location.reload();
-      }, 500);
+      }, 1000);
    }
 
 }
@@ -210,12 +210,13 @@ const handleDeleteReview = (id) => {
                         style={{resize: "none"}}
                       />
 
-                      <button className="button-complimentary text-base self-center mt-5 mb-0" onClick={postReview}>Post Review</button>
+                      <button className="button-complimentary text-base self-center mt-5 mb-0" onClick={postReview}>Add a Review</button>
                     </div>
                 }
             </div>
         <br/>    
         <hr/>
+        <h1 className="text-white font-bold text-2xl text-start mt-10 ml-10">Reviews</h1>
         <div className="reviews-container">
               {ReviewList.map((review) => {
                   return(

@@ -2,9 +2,11 @@ import "../css/Button.css";
 import "../css/AccountSettings.css";
 
 import PopUp from "../components/PopUp";
+import { Button, Checkbox, message } from "antd";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Input } from "antd";
+import axios from 'axios';
 import {
   EyeInvisibleOutlined,
   EyeTwoTone,
@@ -14,6 +16,37 @@ import {
 } from "@ant-design/icons";
 
 const AccountSettings = () => {
+
+  const [UpdatePassword, setUpdatePassword] = useState();
+  const [User, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    username: '',
+  });
+  const [Loaded, setLoaded] = useState(false);
+
+
+  const fetchUser = async () => {
+    const id = sessionStorage.getItem("userId")
+    console.log(id)
+    try {
+        const response = await axios.get(`https://flickd-api.vercel.app/api/users/${id}`);
+        setUser(response.data);
+        setLoaded(true)
+    } catch (error) {
+        console.log(error)
+    }
+
+  console.log(Loaded)
+  }
+
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+
+  const [messageApi, contextHolder] = message.useMessage();
   const [access, setAccess] = useState(true);
   const [edit, setEdit] = useState(false);
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
@@ -26,6 +59,14 @@ const AccountSettings = () => {
       setAccess(true);
       setEdit(false);
     }
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setUser({
+      ...User,
+      [name]: value,
+    });
   };
 
   const handleAccessButton = () => {
@@ -84,6 +125,32 @@ const AccountSettings = () => {
     );
   };
 
+
+  const updateUser = async (formData) => {
+      const id = sessionStorage.getItem("userId")
+      try {
+        const response = await axios.put(`https://flickd-api.vercel.app/api/users/${id}`);
+        if(response.data.message == "Old password is incorrect"){
+          messageApi.open({
+            type: 'error',
+            content: 'Wrong Password',
+          });
+        }
+        else{
+          messageApi.open({
+            type: 'success',
+            content: 'User Updated',
+          });
+
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        }
+      } catch (error) {
+        
+      }
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -97,19 +164,27 @@ const AccountSettings = () => {
       setIsPopUpOpen(true);
       return;
     }
+    else{
+      updateUser(formData)
+    }
 
     console.log(data);
   };
 
   return (
-    <div className="content-section">
+    <>
+      {contextHolder}
+      {Loaded?
+        <div className="content-section">
       <form className="details-container" onSubmit={handleSubmit}>
-        <h1 className="title">Account Settings</h1>
+        <h1 className="title mt-10">Account Settings</h1>
 
         <div className="field-container">
           <div className="text-field">
             <h3 className="subtitle">First name</h3>
             <Input
+              value={User.firstName}
+              onChange={handleChange}
               name="firstName"
               size="large"
               placeholder="John"
@@ -120,6 +195,8 @@ const AccountSettings = () => {
           <div className="text-field">
             <h3 className="subtitle">Last name</h3>
             <Input
+              value={User.lastName}
+              onChange={handleChange}
               name="lastName"
               size="large"
               placeholder="Doe"
@@ -129,19 +206,10 @@ const AccountSettings = () => {
         </div>
 
         <div className="text-field">
-          <h3 className="subtitle">Email</h3>
-          <Input
-            type="email"
-            name="email"
-            size="large"
-            placeholder="john_doe111@email.com"
-            disabled={access}
-          />
-        </div>
-
-        <div className="text-field">
           <h3 className="subtitle">Username</h3>
           <Input
+            value={User.username}
+            onChange={handleChange}
             name="username"
             placeholder="oWo111"
             disabled={access}
@@ -149,10 +217,13 @@ const AccountSettings = () => {
           />
         </div>
 
-        <div className="text-field">
-          <h3 className="subtitle">Password</h3>
+        {!access &&
+          <div>
+          <div className="text-field">
+          <h3 className="subtitle">Input Password to Update</h3>
           <Input.Password
-            name="password"
+            name="oldPassword"
+            onChange={handleChange}
             size="large"
             disabled={access}
             placeholder="123password"
@@ -160,14 +231,40 @@ const AccountSettings = () => {
               visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
             }
           />
-        </div>
+          </div>
+            <Checkbox checked={UpdatePassword} onChange={(e) => {
+              setUpdatePassword(e.target.checked);
+            }} className="font-bold text-base mb-5">Update Password?</Checkbox>
+
+          </div>
+        }
+          {
+            UpdatePassword &&
+            <div className="text-field">
+            <h3 className="subtitle">New Password</h3>
+            <Input.Password
+              onChange={handleChange}
+              name="newPassword"
+              size="large"
+              disabled={access}
+              placeholder="123password"
+              iconRender={(visible) =>
+                visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+              }
+            />
+            </div>
+          }
 
         <div className="button-container">
           {handleAccessButton()}
           {showSave()}
         </div>
       </form>
-    </div>
+        </div>
+       :
+       <h1 className="mt-20 text-center text-bold">LOADING...</h1>
+      }
+    </>
   );
 };
 
