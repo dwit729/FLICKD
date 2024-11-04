@@ -1,0 +1,25 @@
+.reviews-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.review-container {
+    background: var(--compliment);
+    border-radius: 5px;
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.review-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

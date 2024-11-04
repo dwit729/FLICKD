@@ -4,7 +4,8 @@ import {Rate, Input} from "antd";
 import axios from 'axios';
 import {useParams} from 'react-router-dom';
 import "../css/Movie.css"
-
+import "../css/Review.css"
+import ReviewComponent from "../components/Review";
 
 const MoviePage = () => {
   const [Loaded, setLoaded] = useState(false);
@@ -125,9 +126,12 @@ const checkLoggedIn = () => {
         <div className="reviews-container">
               {ReviewList.map((review) => {
                   return(
-                    <>
-                      <p>{review.content}</p>
-                    </>
+                    <ReviewComponent 
+                      reviewer={review.userId.username}
+                      review={review.content} 
+                      rating={review.rating}
+                      posted={review.datePosted}
+                    />
                   )
               })}
         </div>
