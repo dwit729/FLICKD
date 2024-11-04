@@ -23,3 +23,22 @@
     flex-direction: row;
     align-items: center;
 }
+
+.post-date {
+    margin-left: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+    .review-header {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .post-date {
+        margin-left: 0;
+    }
+    
+    .review-body {
+        margin-top: 10px;
+    }
+}

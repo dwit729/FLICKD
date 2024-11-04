@@ -118,7 +118,7 @@ const checkLoggedIn = () => {
                 { LoggedIn &&
                     <div className="segment">
                       <h1>Rate this Movie:</h1>
-                      <Rate  className="self-center" tooltips={desc} onChange={(e) => {setRating(e)}} defaultValue={Rating} />
+                      <Rate className="self-center" tooltips={desc} onChange={(e) => {setRating(e)}} defaultValue={Rating} />
                       {Rating ? <p className="text-center">{desc[Rating - 1]}</p> : ''}
 
                       <br />
