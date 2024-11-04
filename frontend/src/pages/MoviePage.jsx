@@ -7,6 +7,8 @@ import "../css/Movie.css"
 import "../css/Review.css"
 import ReviewComponent from "../components/Review";
 
+const {TextArea} = Input;
+
 const MoviePage = () => {
   const [Loaded, setLoaded] = useState(false);
   const [LoggedIn, setLoggedIn] = useState(true);
@@ -81,7 +83,7 @@ const checkLoggedIn = () => {
     {
       Loaded && 
       <div>
-            <div className="bg-slate-300 h-40  overflow-hidden">
+            <div className="bg-slate-300 h-50  overflow-hidden">
               <img  onError={(e) => {e.target.style.display = 'none'}} src={Movie.bannerUrl} className="banner"/>     
             </div>
             <div>
@@ -116,8 +118,19 @@ const checkLoggedIn = () => {
                 { LoggedIn &&
                     <div className="segment">
                       <h1>Rate this Movie:</h1>
-                      <Rate className="self-center" tooltips={desc} onChange={(e) => {setRating(e)}} defaultValue={Rating} />
+                      <Rate  className="self-center" tooltips={desc} onChange={(e) => {setRating(e)}} defaultValue={Rating} />
                       {Rating ? <p className="text-center">{desc[Rating - 1]}</p> : ''}
+
+                      <br />
+
+                      <TextArea 
+                        rows={8} 
+                        placeholder="Write a review..." 
+                        className="review-section"
+                        style={{resize: "none"}}
+                      />
+
+                      <button className="button-complimentary" style={{width: "100px"}}>Post</button>
                     </div>
                 }
             </div>
