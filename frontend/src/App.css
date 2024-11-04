@@ -198,7 +198,25 @@ body {
 .button-container {
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
+}
+
+.field-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+}
+
+.field-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     justify-content: space-between;
+}
+
+.field-container > div {
+    width: 240px;
 }
 
 /* Profile */
