@@ -1,6 +1,6 @@
 import React from "react";
 import '../css/Review.css';
-import { Rate } from "antd";
+import { Button, Rate } from "antd";
 
 const Review = (props) => {
   return (
@@ -14,6 +14,7 @@ const Review = (props) => {
       <div className="review-body">
         <p className="review-text">{props.review}</p>
       </div>
+      {(props.userId == props.reviewId) && <Button className="mt-3" onClick={props.handleDeleteReview}>Delete Review</Button>}
     </div>
   );
 };

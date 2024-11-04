@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { HeartFilled, StarOutlined } from "@ant-design/icons";
-import {Rate, Input} from "antd";
+import {Rate, Input, Button} from "antd";
 import axios from 'axios';
 import {useParams} from 'react-router-dom';
 import "../css/Movie.css"
@@ -11,7 +11,8 @@ const {TextArea} = Input;
 
 const MoviePage = () => {
   const [Loaded, setLoaded] = useState(false);
-  const [LoggedIn, setLoggedIn] = useState(true);
+  const [LoggedIn, setLoggedIn] = useState(false);
+  const [Favorite, setFavorite] = useState(false);
   const [User, setUser] = useState();
   const { id } = useParams();
   const [Movie, setMovie] = useState();
@@ -20,16 +21,17 @@ const MoviePage = () => {
 
   const desc = ['Terrible', 'Bad', 'Normal', 'Good', 'Wonderful'];
   const [Rating, setRating] = useState(0);
-
-
+  const [Content, setContent] = useState("");
   const [Review, setReview] = useState();
 
 
   
   const fetchUser = async (userId) => {
+    setLoaded(false)
     try {
         const response = await axios.get(`https://flickd-api.vercel.app/api/users/${userId}`);
         setUser(response.data);
+        setLoaded(true)
     } catch (error) {
         
     }
@@ -47,6 +49,48 @@ const checkLoggedIn = () => {
     }
 }
 
+const checkIfFavorite = () => {
+    if(1==1){
+      setFavorite(true)
+    }
+    else{
+      setFavorite(false)
+    }
+}
+
+
+const addToFavorites = async () => {
+   
+}
+
+const postReview = () => {
+   if(Rating<0 || Content.length<10){
+    try {
+      const UserReview = {
+        userId: User._id,
+        rating: Rating,
+        content: Content
+      }
+      console.log(UserReview)
+      const response = axios.post(`https://flickd-api.vercel.app/api/movies/${id}/reviews`, UserReview);
+      if(response){
+        window.alert("Review Posted")
+        window.location.reload();
+      }
+    } catch (error) {
+      console.log(error)
+      window.alert("Error Posting Review")
+    }
+   }
+   else{
+      window.alert("Invalid Review")
+   }
+  
+}
+
+const handleDeleteReview = () => {
+    window.alert("review deleted")
+}
 
   const fetchData = async () => {
       try {
@@ -82,8 +126,8 @@ const checkLoggedIn = () => {
     <>
     {
       Loaded && 
-      <div>
-            <div className="bg-slate-300 h-50  overflow-hidden">
+      <div >
+            <div className="bg-slate-300 h-50 overflow-hidden">
               <img  onError={(e) => {e.target.style.display = 'none'}} src={Movie.bannerUrl} className="banner"/>     
             </div>
             <div>
@@ -93,7 +137,10 @@ const checkLoggedIn = () => {
                 <div className="segment flex-1">
                     <div className="poster-box">
                         <img src={Movie.posterUrl}/>
+                        
                     </div> 
+                    {(LoggedIn && !Favorite) && <Button color="primary" variant="outlined" className="mt-5 w-2/3 min-w-32 self-center">Add to Favorites</Button>}
+                    {(LoggedIn && Favorite) && <Button color="danger" variant="outlined" className="mt-5 w-2/3 min-w-32 self-center">Delete from Favorites</Button>}
                 </div>
                 <div className="segment">
                     <div>
@@ -123,14 +170,16 @@ const checkLoggedIn = () => {
 
                       <br />
 
-                      <TextArea 
+                      <TextArea
+                        value={Content}
+                        onChange={(e)=>{setContent(e.target.value)}} 
                         rows={8} 
                         placeholder="Write a review..." 
-                        className="review-section"
+                        className="review-section self-center"
                         style={{resize: "none"}}
                       />
 
-                      <button className="button-complimentary" style={{width: "100px"}}>Post</button>
+                      <button className="button-complimentary text-base self-center mt-5 mb-0" onClick={postReview}>Post Review</button>
                     </div>
                 }
             </div>
@@ -144,6 +193,9 @@ const checkLoggedIn = () => {
                       review={review.content} 
                       rating={review.rating}
                       posted={review.datePosted}
+                      userId={sessionStorage.getItem("userId")}
+                      reviewId={review.userId._id}
+                      handleDeleteReview = {handleDeleteReview}
                     />
                   )
               })}
