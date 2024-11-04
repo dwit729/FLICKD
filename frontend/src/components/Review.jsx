@@ -14,7 +14,7 @@ const Review = (props) => {
       <div className="review-body">
         <p className="review-text">{props.review}</p>
       </div>
-      {(props.userId == props.reviewId) && <Button className="mt-3" onClick={props.handleDeleteReview}>Delete Review</Button>}
+      {(props.userId == props.reviewId) && <Button className="mt-3" variant="outlined" color="danger" onClick={props.handleDeleteReview}>Delete Review</Button>}
     </div>
   );
 };

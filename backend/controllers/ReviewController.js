@@ -1,5 +1,6 @@
 const Review = require('../models/Review');
 const Movie = require('../models/Movie');
+const User = require('../models/User');
 
 // Get all reviews for a specific movie
 const getAllReviewsForMovie = async (req, res) => {
@@ -72,10 +73,16 @@ const deleteReview = async (req, res) => {
     }
 
     // Remove the review from the associated movie's reviews array
-    const movie = await Movie.findById(review.movie);
+    const movie = await Movie.findById(review.movieId);
     if (movie) {
       movie.reviews = movie.reviews.filter(r => r.toString() !== reviewId);
       await movie.save();
+    }
+
+    const user = await User.findById(review.userId);
+    if (user) {
+      user.reviews = user.reviews.filter(r => r.toString() !== reviewId);
+      await user.save();
     }
 
     // Delete the review

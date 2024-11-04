@@ -1,5 +1,6 @@
 const Movie = require('../models/Movie')
 const Review = require('../models/Review')
+const User = require('../models/User')
 
 
 
@@ -124,6 +125,15 @@ const addReviewToMovie = async (req, res) => {
     await review.save();
     movie.reviews.push(review._id);
     await movie.save();
+
+    // Find the user and add the review ID to their reviews array
+    const user = await User.findById(userId);
+    if (user) {
+      user.reviews.push(review._id);
+      await user.save();
+    } else {
+      return res.status(404).json({ message: 'User not found' });
+    }
 
     res.status(201).json({ message: 'Review added successfully', review });
   } catch (error) {

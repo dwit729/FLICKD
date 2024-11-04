@@ -13,7 +13,7 @@ const MoviePage = () => {
   const [Loaded, setLoaded] = useState(false);
   const [LoggedIn, setLoggedIn] = useState(false);
   const [Favorite, setFavorite] = useState(false);
-  const [User, setUser] = useState();
+  const [User, setUser] = useState({});
   const { id } = useParams();
   const [Movie, setMovie] = useState();
   const [ReviewList, setReviewList] = useState([]);
@@ -32,6 +32,7 @@ const MoviePage = () => {
         const response = await axios.get(`https://flickd-api.vercel.app/api/users/${userId}`);
         setUser(response.data);
         setLoaded(true)
+        checkIfFavorite()
     } catch (error) {
         
     }
@@ -50,11 +51,9 @@ const checkLoggedIn = () => {
 }
 
 const checkIfFavorite = () => {
-    if(1==1){
-      setFavorite(true)
-    }
-    else{
-      setFavorite(false)
+    for (let index = 0; index < User.reviews.length; index++) {
+        console.log(User.reviews[index])
+      
     }
 }
 
@@ -64,7 +63,7 @@ const addToFavorites = async () => {
 }
 
 const postReview = () => {
-   if(Rating<0 || Content.length<10){
+   if(Rating>0 && Content.length>=10){
     try {
       const UserReview = {
         userId: User._id,
@@ -88,8 +87,15 @@ const postReview = () => {
   
 }
 
-const handleDeleteReview = () => {
-    window.alert("review deleted")
+const handleDeleteReview = (id) => {
+   try {
+    const response = axios.delete(`https://flickd-api.vercel.app/api/reviews/${id}`)
+    if(response){
+      window.alert("Review Deleted")
+    }
+   } catch (error) {
+      window.alert("Review Delete Error")
+   }
 }
 
   const fetchData = async () => {
@@ -115,9 +121,9 @@ const handleDeleteReview = () => {
     }
   }
   useEffect(() =>{
-      checkLoggedIn()
+      checkLoggedIn();
       fetchData();
-      fetchReview()
+      fetchReview();
   }, []);
 
 
@@ -195,7 +201,7 @@ const handleDeleteReview = () => {
                       posted={review.datePosted}
                       userId={sessionStorage.getItem("userId")}
                       reviewId={review.userId._id}
-                      handleDeleteReview = {handleDeleteReview}
+                      handleDeleteReview = {()=> {handleDeleteReview(review._id)}}
                     />
                   )
               })}
