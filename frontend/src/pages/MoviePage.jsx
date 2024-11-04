@@ -15,7 +15,7 @@ const MoviePage = () => {
   const [ReviewList, setReviewList] = useState([]);
 
 
-  const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
+  const desc = ['Terrible', 'Bad', 'Normal', 'Good', 'Wonderful'];
   const [Rating, setRating] = useState(0);
 
 
