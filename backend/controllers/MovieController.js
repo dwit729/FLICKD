@@ -79,8 +79,6 @@ const getAllMovies = async (req, res) => {
 };
 
 
-
-
 //GET MOVIE BY ID
 const getMovieById = async (req, res) => {
     try {
@@ -141,6 +139,41 @@ const addReviewToMovie = async (req, res) => {
   }
 };
 
+const updateMovie = async (req, res) => {
+  try {
+    const updatedMovie = await Movie.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedMovie) {
+      return res.status(404).json({ message: 'Movie not found' });
+    }
+
+    res.json({ message: 'Movie updated successfully', updatedMovie });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+
+const deleteMovie = async (req, res) => {
+  try {
+    const deletedMovie = await Movie.findByIdAndDelete(req.params.id);
+
+    if (!deletedMovie) {
+      return res.status(404).json({ message: 'Movie not found' });
+    }
+
+    res.json({ message: 'Movie deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+
+
 module.exports = {
-    createMovie, getAllMovies, getMovieById, addReviewToMovie
+    createMovie, getAllMovies, getMovieById, addReviewToMovie, updateMovie, deleteMovie
 }

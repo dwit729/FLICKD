@@ -12,6 +12,7 @@ import AboutUs from './pages/AboutUsPage';
 import Contact from './pages/Contact';
 import MoviePage from './pages/MoviePage';
 import SearchPage from './pages/SearchPage';
+import AdminPage from './pages/AdminPage';
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
               <Route path='/Contact' element={<Contact/>}/>
               <Route path='/Movie/:id' element={<MoviePage/>}/>
               <Route path='/Search' element={<SearchPage/>}/>
+              <Route path='/Admin' element={<AdminPage/>}/>
             </Routes>
           </BrowserRouter>
       </ConfigProvider>

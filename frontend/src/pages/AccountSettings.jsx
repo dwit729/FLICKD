@@ -129,12 +129,9 @@ const AccountSettings = () => {
   const updateUser = async (formData) => {
       const id = sessionStorage.getItem("userId")
       try {
-        const response = await axios.put(`https://flickd-api.vercel.app/api/users/${id}`);
+        const response = await axios.put(`https://flickd-api.vercel.app/api/users/${id}`, formData);
         if(response.data.message == "Old password is incorrect"){
-          messageApi.open({
-            type: 'error',
-            content: 'Wrong Password',
-          });
+         
         }
         else{
           messageApi.open({
@@ -147,7 +144,10 @@ const AccountSettings = () => {
           }, 1000);
         }
       } catch (error) {
-        
+        messageApi.open({
+          type: 'error',
+          content: 'Update Error',
+        });
       }
   }
 
@@ -165,7 +165,7 @@ const AccountSettings = () => {
       return;
     }
     else{
-      updateUser(formData)
+      updateUser(data)
     }
 
     console.log(data);

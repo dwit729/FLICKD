@@ -13,10 +13,11 @@ const MoviePage = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const [Change, setChange] = useState(true);
   const [Loaded, setLoaded] = useState(false);
+  const [ReviewLoading, setReviewLoading] = useState(false);
   const [DeleteLoading, setDeleteLoading] = useState(false);
   const [LoggedIn, setLoggedIn] = useState(false);
-  const [Favorite, setFavorite] = useState(false);
-  const [User, setUser] = useState({});
+  const [Favorite, setFavorite] = useState();
+  const [User, setUser] = useState();
   const { id } = useParams();
   const [Movie, setMovie] = useState();
   const [ReviewList, setReviewList] = useState([]);
@@ -28,43 +29,54 @@ const MoviePage = () => {
   const [Review, setReview] = useState();
 
 
-  
-  const fetchUser = async (userId) => {
-    setLoaded(false)
-    try {
-        const response = await axios.get(`https://flickd-api.vercel.app/api/users/${userId}`);
-        setUser(response.data);
-        checkIfFavorite()
-    } catch (error) {
-        
-    }
-  }
-
-
 
 
 const checkLoggedIn = () => {
+ 
     try {
         const userId = sessionStorage.getItem('userId');
         if(userId){
             setLoggedIn(true)
-            fetchUser(userId)
         }
     } catch (error) {
         
     }
 }
 
-const checkIfFavorite = () => {
-    for (let index = 0; index < User.reviews.length; index++) {
-        console.log(User.reviews[index])
-      
-    }
-}
 
 
 const addToFavorites = async () => {
-   
+   try {
+    const response = await axios.post(`https://flickd-api.vercel.app/api/users/${User._id}/favorites`, {movieId: id});
+    if(response){
+      messageApi.open({
+        type: 'success',
+        content: 'Movie Added to Favorites Succesfully',
+      });
+      setFavorite(true)
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    }
+   } catch (error) {
+   }
+}
+
+const deleteFromFavorites = async () => {
+  try {
+    const response = await axios.delete(`https://flickd-api.vercel.app/api/users/${User._id}/favorites/${id}`);
+    if(response){
+      messageApi.open({
+        type: 'success',
+        content: 'Movie Deleted from Favorites Succesfully',
+      });
+      setFavorite(false)
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    }
+   } catch (error) {
+   }
 }
 
 const postReview = () => {
@@ -123,6 +135,7 @@ const handleDeleteReview = (id) => {
 }
 
   const fetchData = async () => {
+    setLoaded(false)
       try {
         const response = await axios.get(`https://flickd-api.vercel.app/api/movies/${id}`)
         console.log(`https://flickd-api.vercel.app/api/movies/${id}`)
@@ -131,15 +144,25 @@ const handleDeleteReview = (id) => {
       } catch (error) {
         console.log(error)
       }
+
+      try {
+        const response = await axios.get(`https://flickd-api.vercel.app/api/users/${sessionStorage.getItem('userId')}`)
+        setUser(response.data);
+        console.log(User)
+        console.log(Favorite)
+     
+    } catch (error) {
+        
+    }
   }
 
   const fetchReview = async () => {
-      setLoaded(false)
+      setReviewLoading(false)
     try {
       const response = await axios.get(`https://flickd-api.vercel.app/api/reviews/movie/${id}`)
       setReviewList(response.data);
       console.log(ReviewList)
-      setLoaded(true)
+      setReviewLoading(true)
     } catch (error) {
       console.log(error)
     }
@@ -156,7 +179,7 @@ const handleDeleteReview = (id) => {
     <>
     {contextHolder}
     {
-      Loaded?
+      (Loaded && User)?
       <div >
             <div className="bg-slate-300 h-50 overflow-hidden">
               <img  onError={(e) => {e.target.style.display = 'none'}} src={Movie.bannerUrl} className="banner"/>     
@@ -170,8 +193,8 @@ const handleDeleteReview = (id) => {
                         <img src={Movie.posterUrl}/>
                         
                     </div> 
-                    {(LoggedIn && !Favorite) && <Button color="primary" variant="outlined" className="mt-5 w-2/3 min-w-32 self-center">Add to Favorites</Button>}
-                    {(LoggedIn && Favorite) && <Button color="danger" variant="outlined" className="mt-5 w-2/3 min-w-32 self-center">Delete from Favorites</Button>}
+                    {(LoggedIn && !(User.favorites.some(favorite => favorite == id))) && <Button color="primary" onClick={addToFavorites} variant="outlined" className="mt-5 w-2/3 min-w-32 self-center">Add to Favorites</Button>}
+                    {(LoggedIn && (User.favorites.some(favorite => favorite == id))) && <Button color="danger" onClick={deleteFromFavorites} variant="outlined" className="mt-5 w-2/3 min-w-32 self-center">Delete from Favorites</Button>}
                 </div>
                 <div className="segment">
                     <div>
@@ -202,6 +225,7 @@ const handleDeleteReview = (id) => {
                       <br />
 
                       <TextArea
+                        maxLength="100"
                         value={Content}
                         onChange={(e)=>{setContent(e.target.value)}} 
                         rows={8} 
@@ -210,14 +234,16 @@ const handleDeleteReview = (id) => {
                         style={{resize: "none"}}
                       />
 
-                      <button className="button-complimentary text-base self-center mt-5 mb-0" onClick={postReview}>Add a Review</button>
+                      <button className="button-complimentary text-sm self-center mt-5 mb-0" onClick={postReview}>Add a Review</button>
                     </div>
                 }
             </div>
         <br/>    
         <hr/>
         <h1 className="text-white font-bold text-2xl text-start mt-10 ml-10">Reviews</h1>
-        <div className="reviews-container">
+        {
+          !ReviewLoading ? <h1 className="text-white font-bold text-2xl text-start mt-10 ml-10">Loading....</h1> :
+          <div className="reviews-container">
               {ReviewList.map((review) => {
                   return(
                     <ReviewComponent 
@@ -232,6 +258,7 @@ const handleDeleteReview = (id) => {
                   )
               })}
         </div>
+        }
       </div>
       :
       <h1 className="title text-center mt-20">LOADING.....</h1>

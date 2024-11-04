@@ -115,7 +115,7 @@ const checkLoggedIn = () => {
 
           {!LoggedIn && <a href="/login" type="button" className="button-default m-0">Get Started - It's free!</a>}
           <div className="content-segment">
-            <FontAwesomeIcon size="2x" icon={faEye} />
+            <FontAwesomeIcon onClick={()=>{navigate("/admin")}} size="2x" icon={faEye} />
             <p className="text-segment">
               Search for Movies you love and get their details!
             </p>
