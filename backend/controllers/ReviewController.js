@@ -25,7 +25,7 @@ const getAllReviewsForMovie = async (req, res) => {
 const getReviewById = async (req, res) => {
   try {
     const { reviewId } = req.params;
-    const review = await Review.findById(reviewId).populate('user', 'username');
+    const review = await Review.findById(reviewId).populate('userId', 'username');
     
     if (!review) {
       return res.status(404).json({ message: 'Review not found' });
@@ -94,9 +94,29 @@ const deleteReview = async (req, res) => {
   }
 };
 
+// Get all reviews for a specific user
+const getAllReviewsForUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    // Check if the user exists
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Find all reviews related to the user
+    const reviews = await Review.find({ userId }).populate('movieId', 'title year');
+    res.json(reviews);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
 module.exports = { 
   getAllReviewsForMovie, 
   getReviewById, 
   updateReview, 
-  deleteReview 
+  deleteReview,
+  getAllReviewsForUser
 };

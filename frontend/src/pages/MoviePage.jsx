@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { HeartFilled, StarOutlined } from "@ant-design/icons";
-import {Rate, Input, Button} from "antd";
+import {Rate, Input, Button, Popconfirm, message} from "antd";
 import axios from 'axios';
 import {useParams} from 'react-router-dom';
 import "../css/Movie.css"
@@ -10,7 +10,10 @@ import ReviewComponent from "../components/Review";
 const {TextArea} = Input;
 
 const MoviePage = () => {
+  const [messageApi, contextHolder] = message.useMessage();
+  const [Change, setChange] = useState(true);
   const [Loaded, setLoaded] = useState(false);
+  const [DeleteLoading, setDeleteLoading] = useState(false);
   const [LoggedIn, setLoggedIn] = useState(false);
   const [Favorite, setFavorite] = useState(false);
   const [User, setUser] = useState({});
@@ -31,12 +34,14 @@ const MoviePage = () => {
     try {
         const response = await axios.get(`https://flickd-api.vercel.app/api/users/${userId}`);
         setUser(response.data);
-        setLoaded(true)
         checkIfFavorite()
     } catch (error) {
         
     }
-}
+  }
+
+
+
 
 const checkLoggedIn = () => {
     try {
@@ -63,7 +68,7 @@ const addToFavorites = async () => {
 }
 
 const postReview = () => {
-   if(Rating>0 && Content.length>=10){
+   if(Rating>0 && Content.length>=5){
     try {
       const UserReview = {
         userId: User._id,
@@ -72,30 +77,49 @@ const postReview = () => {
       }
       console.log(UserReview)
       const response = axios.post(`https://flickd-api.vercel.app/api/movies/${id}/reviews`, UserReview);
+      
       if(response){
-        window.alert("Review Posted")
-        window.location.reload();
+        messageApi.open({
+          type: 'success',
+          content: 'Review Added',
+        });
+        setRating(0)
+        setContent("")
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
       }
     } catch (error) {
       console.log(error)
       window.alert("Error Posting Review")
-    }
+    } 
    }
-   else{
-      window.alert("Invalid Review")
+   else{    
+    messageApi.open({
+      type: 'error',
+      content: 'Invalid Review',
+    });
    }
-  
+   
 }
 
 const handleDeleteReview = (id) => {
+  setDeleteLoading(true)
    try {
-    const response = axios.delete(`https://flickd-api.vercel.app/api/reviews/${id}`)
-    if(response){
-      window.alert("Review Deleted")
-    }
+    const response = axios.delete(`https://flickd-api.vercel.app/api/reviews/${id}`);
    } catch (error) {
       window.alert("Review Delete Error")
+   } finally {
+      setDeleteLoading(false)
+      messageApi.open({
+        type: 'success',
+        content: 'Review Deleted Succesfully',
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
    }
+
 }
 
   const fetchData = async () => {
@@ -130,8 +154,9 @@ const handleDeleteReview = (id) => {
 
   return (
     <>
+    {contextHolder}
     {
-      Loaded && 
+      Loaded?
       <div >
             <div className="bg-slate-300 h-50 overflow-hidden">
               <img  onError={(e) => {e.target.style.display = 'none'}} src={Movie.bannerUrl} className="banner"/>     
@@ -207,6 +232,8 @@ const handleDeleteReview = (id) => {
               })}
         </div>
       </div>
+      :
+      <h1 className="title text-center mt-20">LOADING.....</h1>
     }
      
     </>

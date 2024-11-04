@@ -3,16 +3,15 @@ import "../css/LogIn.css";
 import "../images/logo.jpg";
 import PopUp from "../components/PopUp";
 import { useNavigate } from "react-router-dom";
+import { message } from "antd";
 import axios from "axios";
 
 const Login = () => {
-
+  const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
-  const [triggerPopup, setTriggerPopUp] = useState(false);
+
   const [Loading, setLoading] = useState(false);
-  const [PopUpData, setPopUpData] = useState({
-    message: "", type:""
-  });
+
   const [formData, setFormData] = useState({
     username: "", password: ""
   });
@@ -30,10 +29,16 @@ const Login = () => {
         console.log(response.data)
         if(response.data.message == "Login successful"){
           setLoading(false)
-            window.alert("Login Successful!")
            sessionStorage.setItem("userId", response.data.userId);
-           navigate("/")
-           window.location.reload();
+           messageApi.open({
+            type: 'success',
+            content: 'LOGIN SUCCESSFUL',
+          });
+          
+          setTimeout(() => {
+             navigate("/")
+            window.location.reload();
+          }, 500);
         }
        
       } catch (error) {
@@ -43,6 +48,8 @@ const Login = () => {
   }
 
   return (
+    <>
+    {contextHolder}
     <div className="login-container">
       <div className="login-box">
         <button className="close-btn">x</button>
@@ -68,6 +75,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

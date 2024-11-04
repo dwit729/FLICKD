@@ -4,7 +4,8 @@ const {
   getAllReviewsForMovie, 
   getReviewById, 
   updateReview, 
-  deleteReview 
+  deleteReview,
+  getAllReviewsForUser
 } = require('../controllers/ReviewController');
 
 // Get all reviews for a specific movie
@@ -18,5 +19,8 @@ router.put('/:reviewId', updateReview);
 
 // Delete a review by ID
 router.delete('/:reviewId', deleteReview);
+
+// Get all reviews for a specific movie
+router.get('/user/:userId', getAllReviewsForUser);
 
 module.exports = router;

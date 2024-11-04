@@ -1,5 +1,6 @@
 const Movie = require('../models/Movie');
 const User = require('../models/User');
+const Review = require('../models/Review');
 const bcrypt = require('bcryptjs');  // For password hashing
 
 // Register a new user
@@ -161,12 +162,12 @@ const getUserFavorites = async (req, res) => {
     }
 
     // Retrieve favorite movies by IDs
-    const favoriteMovies = await Movie.find({ _id: { $in: user.favoriteMovies } }).lean();
+    const favoriteMovies = await Movie.find({ _id: { $in: user.favorites } }).lean();
     return res.status(200).json(favoriteMovies);
 
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: 'Error retrieving favorite movies' });
+    return res.status(500).json({message: error});
   }
 };
 
@@ -185,7 +186,7 @@ const getUserReviews = async (req, res) => {
 
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: 'Error retrieving user reviews' });
+    return res.status(500).json({message: error });
   }
 };
 

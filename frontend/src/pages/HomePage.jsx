@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { Carousel, Flex, Layout } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faHeart, faStar } from "@fortawesome/free-regular-svg-icons";
@@ -14,7 +14,27 @@ const { Header, Footer, Sider, Content } = Layout;
 
 
 
+
+
 const HomePage = () => {
+
+const [LoggedIn, setLoggedIn] = useState(false);
+
+const checkLoggedIn = () => {
+    try {
+        const userId = sessionStorage.getItem('userId');
+        if(userId){
+            setLoggedIn(true)  
+           
+        }
+        else{
+          setLoggedIn(false)
+        }
+    } catch (error) {
+        
+    }
+}
+
   const movieList = [
     {
       title: "Spider Man: No Way Home",
@@ -48,7 +68,6 @@ const HomePage = () => {
 
   const navigate = useNavigate();
   function determineArrow(type) {
-    
 
     return (
       <FontAwesomeIcon
@@ -57,9 +76,16 @@ const HomePage = () => {
       />
     );
   }
+
+  useEffect(() => {
+    checkLoggedIn();
+  }, []);
+
+
+
   return (
     <>
-      <div className="content-container">
+        <div className="content-container">
         <div className="hero-container">
           <div className="carousel-container">
           <Carousel
@@ -87,8 +113,7 @@ const HomePage = () => {
             Watch, Feel, Review, and Share! Experience FLiCKD!
           </h1>
 
-          <a href="/login" type="button" className="button-default m-0">Get Started - It's free!</a>
-
+          {!LoggedIn && <a href="/login" type="button" className="button-default m-0">Get Started - It's free!</a>}
           <div className="content-segment">
             <FontAwesomeIcon size="2x" icon={faEye} />
             <p className="text-segment">
