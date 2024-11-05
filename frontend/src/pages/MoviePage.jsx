@@ -17,7 +17,13 @@ const MoviePage = () => {
   const [DeleteLoading, setDeleteLoading] = useState(false);
   const [LoggedIn, setLoggedIn] = useState(false);
   const [Favorite, setFavorite] = useState();
-  const [User, setUser] = useState();
+  const [User, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    reviews: [],
+    favorites: [],
+    username: ""
+  });
   const { id } = useParams();
   const [Movie, setMovie] = useState();
   const [ReviewList, setReviewList] = useState([]);
@@ -31,16 +37,25 @@ const MoviePage = () => {
 
 
 
+const fetchUser = async() =>{
+      try {
+        const response = await axios.get(`https://flickd-api.vercel.app/api/users/${sessionStorage.getItem('userId')}`)
+        setUser(response.data);
+        console.log(User)
+        console.log(Favorite)
+        setLoaded(true)
+    } catch (error) {
+        console.log
+    }
+}
+
+
 const checkLoggedIn = () => {
- 
-    try {
         const userId = sessionStorage.getItem('userId');
         if(userId){
             setLoggedIn(true)
+            fetchUser();
         }
-    } catch (error) {
-        
-    }
 }
 
 
@@ -145,15 +160,6 @@ const handleDeleteReview = (id) => {
         console.log(error)
       }
 
-      try {
-        const response = await axios.get(`https://flickd-api.vercel.app/api/users/${sessionStorage.getItem('userId')}`)
-        setUser(response.data);
-        console.log(User)
-        console.log(Favorite)
-     
-    } catch (error) {
-        
-    }
   }
 
   const fetchReview = async () => {
@@ -179,7 +185,7 @@ const handleDeleteReview = (id) => {
     <>
     {contextHolder}
     {
-      (Loaded && User)?
+      (Loaded)?
       <div >
             <div className="bg-slate-300 h-50 overflow-hidden">
               <img  onError={(e) => {e.target.style.display = 'none'}} src={Movie.bannerUrl} className="banner"/>     
@@ -194,7 +200,7 @@ const handleDeleteReview = (id) => {
                         
                     </div> 
                     {(LoggedIn && !(User.favorites.some(favorite => favorite == id))) && <Button color="primary" onClick={addToFavorites} variant="outlined" className="mt-5 w-2/3 min-w-32 self-center">Add to Favorites</Button>}
-                    {(LoggedIn && (User.favorites.some(favorite => favorite == id))) && <Button color="danger" onClick={deleteFromFavorites} variant="outlined" className="mt-5 w-2/3 min-w-32 self-center">Delete from Favorites</Button>}
+                    {(LoggedIn &&  (User.favorites.some(favorite => favorite == id))) && <Button color="danger" onClick={deleteFromFavorites} variant="outlined" className="mt-5 w-2/3 min-w-32 self-center">Delete from Favorites</Button>}
                 </div>
                 <div className="segment">
                     <div>
